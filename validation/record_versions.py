@@ -7,7 +7,10 @@ or paste into the Slicer Python console (set CONFIG path below).
 import sys, platform, datetime
 from importlib import metadata
 
-CONFIG = sys.argv[-1] if sys.argv[-1].endswith(".yaml") else "pipeline_config.yaml"
+from pathlib import Path
+_DEFAULT = Path(__file__).resolve().parents[1] / "config" / "pipeline_config.yaml" if "__file__" in globals() \
+    else Path("config") / "pipeline_config.yaml"
+CONFIG = sys.argv[-1] if sys.argv and sys.argv[-1].endswith(".yaml") else str(_DEFAULT)
 
 def pkg(name):
     try:
