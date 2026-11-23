@@ -13,13 +13,14 @@
 
 software:
   # Filled automatically by record_versions.py - do not type by hand
-  slicer_version: null
-  slicer_revision: null
+  slicer_version: "5.12.4"
+  slicer_revision: "4e21c19"
   slicerheart_4dflow: "0.5.2"
-  python: null
-  os: null
-  run_location: "Imperial Secure Enclave"      # phantom runs: "local"
+  python: "3.12.10"
+  os: "Windows-11-10.0.26200-SP0"
+  run_location: "local laptop (phantom check). Patient data: Imperial Secure Enclave, versions to be recorded there"
   phantom_validation_run: "2026-11-13 and 2026-11-23, Python library outside Slicer, digital phantoms only"
+  slicer_reproduction: "2026-11-23, wss_voxel_size.py run inside 3D Slicer 5.12.4 gave identical results at every voxel size"
 
 input:
   vendor: null                 # FILL when pilot case arrives (Siemens / Philips / GE)
