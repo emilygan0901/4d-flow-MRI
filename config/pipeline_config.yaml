@@ -58,11 +58,18 @@ pc_mra:
   threshold: "none - lumen mask comes from segmentation, not from thresholding the PC-MRA"   # confirm
   role: "Angiogram for segmentation and QC only, not a study outcome"
 
+divergence_free_filter:
+  used: false
+  phantom_evidence: "fdm reduced velocity noise 18% but left flow and WSS unchanged; dfw increased velocity error; WSS bias -62 to -65% with all filters (test7)"
+  rationale: "WSS error is resolution bias, not noise; an extra step with no effect on study outcomes is left out"
+
 segmentation:
   primary: "TotalSegmentator MRI"
   manual_correction: "ITK-SNAP"
   stretch_goal: "nnU-Net"
   qc: "Visual check of every mask, Dice against manual on a subset"
+  phantom_evidence: "one voxel too small: flow -15%, radius -20%; one voxel too large: flow +3%, radius +15% (test6)"
+  rule: "when uncertain at the wall, include the voxel rather than exclude it"
 
 centreline_and_planes:
   centreline: "VMTK"

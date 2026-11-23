@@ -39,7 +39,7 @@ phantoms.
 WSS is therefore reported descriptively only and is not used in the
 hypothesis tests.
 
-### Pipeline steps (tests 1-5)
+### Pipeline steps (tests 1-7)
 
 | Test | Script | What is checked | Result | Proposed pass rule |
 |---|---|---|---|---|
@@ -49,6 +49,8 @@ hypothesis tests.
 | 3b. Local frame | `test3_plane_sampling.py` | Aorta-like centreline, 305 mm, out-of-plane arch, 0.3 mm jitter | Parallel transport: orthonormal to 1e-16, largest turn 4.1 deg between points, no flips. Frenet frame: 88 flips up to 180 deg | No flips: **pass** (Frenet rejected) |
 | 4. 20-phase resampling | `test4_temporal_resampling.py` | 15-40 frames, RR 600-1000 ms, random trigger offset, 50 repeats | Mean flow within 0.1% for both methods. Peak flow: linear interpolation -1% (40 frames) to -7% mean, -12% worst (15 frames). Fourier interpolation within 0.3% | Mean flow < 2%: **pass**. Use Fourier for retrospectively gated data |
 | 5. PWV timing | `test5_pwv_timing.py` | Known delay over 250 mm, 20 planes, 20-40 frames, 3% noise, 200 repeats | Median bias within ±4% at all settings. Spread grows with stiffness: IQR 11-12% at 4 m/s, 34-43% at 12 m/s. 20-plane regression roughly halves the spread of the two-plane method | Bias < 10%: **pass**. Precision limited for stiff aortas |
+| 6. Mask sensitivity | `test6_mask_sensitivity.py` | Womersley tube at 2.5 mm, SNR 1.8, mask eroded or dilated by one voxel, 5 seeds | True mask: flow -1.0%. Eroded: flow -14.8%, radius -20%. Dilated: flow +2.7%, radius +15%. WSS moves by 15-40 points either way | Reported, no pass rule. Under-segmentation is the costly error |
+| 7. Divergence-free filter | `test7_divergence_free_wss.py` | Same tube, filters fdm, relaxed, dfw | fdm cut velocity noise by 18% (44 to 37 mm/s) with no change in flow or WSS. dfw raised velocity error to 57 mm/s. WSS error stayed -62 to -65% with every filter, the same as noise free | Filtering does not fix WSS: **not adopted** |
 
 Notes
 - Test 4: the Fourier result uses a smooth synthetic waveform covering the
@@ -59,6 +61,13 @@ Notes
   (21 ms at 12 m/s) is about one frame. Group comparisons remain valid;
   individual PWV values in stiff aortas are uncertain. This is reported as a
   limitation of the H1 PWV outcome.
+- Test 6: missing one voxel of lumen loses about 15% of flow, while one extra
+  voxel adds only about 3%, because the extra voxels carry only noise. A
+  segmentation that errs slightly large is safer than one that errs small.
+  Every mask is checked visually, and lumen radius normalises the polar grid,
+  so radius errors also shift where each grid ring falls.
+- Test 7: the WSS error is a voxel-size bias, not noise, so no filter removes
+  it. WSS stays descriptive only.
 
 ### Reproduce
 
@@ -72,6 +81,8 @@ python validation/phantom/test2_flow_conservation.py
 python validation/phantom/test3_plane_sampling.py
 python validation/phantom/test4_temporal_resampling.py
 python validation/phantom/test5_pwv_timing.py      # about 3 minutes
+python validation/phantom/test6_mask_sensitivity.py
+python validation/phantom/test7_divergence_free_wss.py
 ```
 
 Results are written to `validation/results/`.
@@ -85,6 +96,5 @@ of the file, with the reason, and all subjects are re-processed.
 
 ## Next steps
 
-- Phantom tests of mask sensitivity and divergence-free filtering before WSS
 - Dry run on the public `slicerheart_4dflow` clinical test cases
 - Batch pipeline and per-case QC report
