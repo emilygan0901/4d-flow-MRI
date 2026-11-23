@@ -21,6 +21,7 @@ diameter, and finally describes variation within the patient group.
 | `validation/phantom/` | Digital phantom tests of the SlicerHeart 4D Flow processing steps |
 | `validation/results/` | Saved outputs of those tests (JSON) |
 | `validation/record_versions.py` | Writes Slicer, Python and package versions into the config |
+| `figures/make_phantom_figures.py` | Builds the phantom figures (PNG, PDF, SVG) |
 | `pipeline/planes.py` | Centreline frames (parallel transport) and 16 x 32 polar plane sampling |
 | `pipeline/timing.py` | Normalisation to 20 cardiac phases and PWV transit-time estimation |
 
