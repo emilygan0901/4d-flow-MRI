@@ -50,24 +50,37 @@ def run_case(data, cid):
     dt = rr / nt
     coverage = float((tms[-1] - tms[0] + np.median(np.diff(tms))) / rr)
     lumen = C["lumen"]
+    for k in ("velocity_t", "velocity_raw_t", "wrap_count_t", "lumen_labelmap", "plane_lumen_labelmap"):
+        C.pop(k, None)                                            # free memory (7 GB machines)
+    raw = np.asarray(C.pop("velocity_raw_encoded_t"), np.float32)
+    mag = np.asarray(C.pop("magnitude_t"), np.float32)
     t1 = time.time()
-    P = f.preprocess(C["velocity_raw_encoded_t"], C["magnitude_t"], np.asarray(C["venc_encoded_mm_s"]), A,
+    P = f.preprocess(raw, mag, np.asarray(C["venc_encoded_mm_s"]), A,
                      lumen_mask=lumen, background_method="war+msac", unwrap_method="laplacian_then_temporal",
                      encoding_to_world=np.asarray(C["encoding_to_world"]), verbose=False)
     t_proc = time.time() - t1
     v = P["velocity"]
     enc = f.encoding_check(v, lumen, A)
-    # sensitivity: the same unwrapping with other background corrections
-    alt = {}
-    for bm in ALT_BACKGROUND:
-        try:
-            alt[bm] = f.preprocess(C["velocity_raw_encoded_t"], C["magnitude_t"], np.asarray(C["venc_encoded_mm_s"]), A,
-                                   lumen_mask=lumen, background_method=bm, unwrap_method="laplacian_then_temporal",
-                                   encoding_to_world=np.asarray(C["encoding_to_world"]), verbose=False)["velocity"]
-        except Exception as e:
-            alt[bm] = None
+    v = np.asarray(v, np.float32)
+    P = None
     planes = {k: p for k, p in C.get("planes", {}).items() if is_aortic(k)}
     regions = C.get("plane_lumen", {}) or {}
+    dt = rr / nt
+    # sensitivity: the same unwrapping with other background corrections, one at a time
+    alt_net = {}
+    for bm in ALT_BACKGROUND:
+        try:
+            va = f.preprocess(raw, mag, np.asarray(C["venc_encoded_mm_s"]), A, lumen_mask=lumen, background_method=bm,
+                              unwrap_method="laplacian_then_temporal",
+                              encoding_to_world=np.asarray(C["encoding_to_world"]), verbose=False)["velocity"]
+            for name, pl in planes.items():
+                qa = np.asarray(f.plane_flow(va, A, centre=pl["centre"], normal=pl["normal"], radius=pl["radius"],
+                                             lumen_mask=regions.get(name, lumen))["flow"])
+                alt_net.setdefault(name, {})[f"net_mL_{bm or 'none'}"] = float(qa.sum() * dt / 1e6)
+            del va
+        except Exception:
+            pass
+    del raw, mag
     cvi = (C.get("references") or {}).get("cvi42", {})
     lib = (C.get("flows") or {}).get("planes", {})
     res_planes = {}
@@ -77,11 +90,7 @@ def run_case(data, cid):
         q = np.asarray(pf["flow"]) / 1000.0                       # mL/s
         net = float(q.sum() * dt / 1000.0)                        # mL per beat
         row = dict(net_mL=net, peak_flow_mL_s=float(np.abs(q).max()))
-        for bm, va in alt.items():
-            if va is not None:
-                qa = np.asarray(f.plane_flow(va, A, centre=pl["centre"], normal=pl["normal"], radius=pl["radius"],
-                                             lumen_mask=region)["flow"])
-                row[f"net_mL_{bm or 'none'}"] = float(qa.sum() * dt / 1e6)
+        row.update(alt_net.get(name, {}))
         if name in lib:
             row["library_net_mL"] = float(lib[name]["net_volume_mL"])
         cp = (cvi.get("planes") or {}).get(name)
@@ -129,15 +138,25 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", default=None, help="folder of the data set (default: download to the library cache)")
     ap.add_argument("--cases", nargs="*", default=None)
+    ap.add_argument("--one", default=None, help=argparse.SUPPRESS)
+    ap.add_argument("--out", default=None, help=argparse.SUPPRESS)
     a = ap.parse_args()
     data = a.data or f.clinical_test_data()
     cases = a.cases or f.dataset_cases(data)
-    rows = []
-    for cid in cases:
+    if a.one:
         try:
-            r = run_case(data, cid)
-        except Exception as e:                                   # record and continue
-            r = dict(case=cid, error=f"{type(e).__name__}: {e}")
+            r = run_case(data, a.one)
+        except Exception as e:
+            r = dict(case=a.one, error=f"{type(e).__name__}: {e}")
+        json.dump(r, open(a.out, "w"))
+        return
+    import subprocess, tempfile
+    rows = []
+    for cid in cases:                                            # one process per case keeps memory bounded
+        tmp = Path(tempfile.mkstemp(suffix=".json")[1])
+        rc = subprocess.run([sys.executable, "-I", __file__, "--data", str(data), "--one", cid, "--out", str(tmp)]).returncode
+        r = json.load(open(tmp)) if rc == 0 and tmp.stat().st_size else dict(case=cid, error=f"process exit code {rc}")
+        tmp.unlink(missing_ok=True)
         rows.append(r)
         if "error" in r:
             print(cid, "ERROR", r["error"]); continue
