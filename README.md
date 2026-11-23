@@ -21,7 +21,8 @@ diameter, and finally describes variation within the patient group.
 | `validation/phantom/` | Digital phantom tests of the SlicerHeart 4D Flow processing steps |
 | `validation/results/` | Saved outputs of those tests (JSON) |
 | `validation/record_versions.py` | Writes Slicer, Python and package versions into the config |
-| `pipeline/` | Batch processing pipeline (in development) |
+| `pipeline/planes.py` | Centreline frames (parallel transport) and 16 x 32 polar plane sampling |
+| `pipeline/timing.py` | Normalisation to 20 cardiac phases and PWV transit-time estimation |
 
 ## Phantom validation
 
@@ -38,6 +39,27 @@ phantoms.
 WSS is therefore reported descriptively only and is not used in the
 hypothesis tests.
 
+### Pipeline steps (tests 1-5)
+
+| Test | Script | What is checked | Result | Proposed pass rule |
+|---|---|---|---|---|
+| 1. Velocity axes and sign | `test1_encoding_sign.py` | Stenosis phantom, 2.5 m/s VENC, SNR 12, corrupted by 6 known swaps and sign flips, 3 seeds | All 21 inputs (7 cases x 3 seeds) recovered exactly. Swaps and partial flips detected by `encoding_check` (divergence ratio 6.5-37). A whole-field flip is invisible to divergence (ratio 1.0) and was fixed by `expected_flow_sign` | Correct mapping every time: **pass** |
+| 2. Flow conservation | `test2_flow_conservation.py` | Stenosis (30%) at 2.5 mm, SNR 12, 13 planes 5 mm apart, 5 seeds. Bifurcation 60/40 | Net flow within 3.6% of truth at every plane, SD between planes 1.2%, largest errors at the narrowing. Bifurcation parent vs daughters -0.6 ± 1.1%, split 0.600 (true 0.600) | < 5% between planes: **pass** |
+| 3a. Polar sampling | `test3_plane_sampling.py` | Poiseuille tube oblique to the voxel grid, 16 x 32 polar grid | 1 mm noise free: axial profile RMSE 0.3% of peak, radial and circumferential 0.0%, flow -0.05%. 2.5 mm SNR 12: profile RMSE 2.7%, radial and circumferential 0.4%, flow -0.5% | In-plane < 2%, flow < 2%: **pass** |
+| 3b. Local frame | `test3_plane_sampling.py` | Aorta-like centreline, 305 mm, out-of-plane arch, 0.3 mm jitter | Parallel transport: orthonormal to 1e-16, largest turn 4.1 deg between points, no flips. Frenet frame: 88 flips up to 180 deg | No flips: **pass** (Frenet rejected) |
+| 4. 20-phase resampling | `test4_temporal_resampling.py` | 15-40 frames, RR 600-1000 ms, random trigger offset, 50 repeats | Mean flow within 0.1% for both methods. Peak flow: linear interpolation -1% (40 frames) to -7% mean, -12% worst (15 frames). Fourier interpolation within 0.3% | Mean flow < 2%: **pass**. Use Fourier for retrospectively gated data |
+| 5. PWV timing | `test5_pwv_timing.py` | Known delay over 250 mm, 20 planes, 20-40 frames, 3% noise, 200 repeats | Median bias within ±4% at all settings. Spread grows with stiffness: IQR 11-12% at 4 m/s, 34-43% at 12 m/s. 20-plane regression roughly halves the spread of the two-plane method | Bias < 10%: **pass**. Precision limited for stiff aortas |
+
+Notes
+- Test 4: the Fourier result uses a smooth synthetic waveform covering the
+  whole RR interval. It applies to retrospectively gated data only; for
+  prospective gating (part of the cycle missing) linear interpolation is used.
+  Confirm the gating on the pilot case.
+- Test 5: PWV is unbiased but imprecise at high PWV, because the transit time
+  (21 ms at 12 m/s) is about one frame. Group comparisons remain valid;
+  individual PWV values in stiff aortas are uncertain. This is reported as a
+  limitation of the H1 PWV outcome.
+
 ### Reproduce
 
 ```bash
@@ -45,6 +67,11 @@ pip install -r requirements.txt
 python validation/phantom/background_correction.py
 python validation/phantom/unwrapping_flow_wss.py
 python validation/phantom/wss_voxel_size.py
+python validation/phantom/test1_encoding_sign.py
+python validation/phantom/test2_flow_conservation.py
+python validation/phantom/test3_plane_sampling.py
+python validation/phantom/test4_temporal_resampling.py
+python validation/phantom/test5_pwv_timing.py      # about 3 minutes
 ```
 
 Results are written to `validation/results/`.
@@ -58,8 +85,6 @@ of the file, with the reason, and all subjects are re-processed.
 
 ## Next steps
 
-- Phantom tests of velocity encoding and sign, flow conservation along the
-  vessel, plane sampling and local frame, temporal resampling, PWV timing,
-  mask sensitivity and divergence-free filtering
+- Phantom tests of mask sensitivity and divergence-free filtering before WSS
 - Dry run on the public `slicerheart_4dflow` clinical test cases
 - Batch pipeline and per-case QC report

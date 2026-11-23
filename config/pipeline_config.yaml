@@ -70,7 +70,21 @@ centreline_and_planes:
   regions: {ascending: 8, arch: 4, descending: 8}
   sampling_grid: {radial: 16, circumferential: 32}
   temporal_phases: 20          # resampled, normalised to RR interval
-  local_frame: "axial / radial / circumferential, parallel transport along centreline"
+  local_frame: "axial / radial / circumferential, parallel transport along centreline (pipeline/planes.py)"
+  frame_reference_vector: "anterior, same for every subject, sets theta = 0"
+  orientation_checks: "encoding_check for component order, expected_flow_sign in ascending aorta (normal cranial)"
+  phantom_evidence:
+    encoding: "21/21 corrupted inputs recovered (test1)"
+    flow_conservation: "net flow within 3.6% at all planes, SD 1.2% (test2)"
+    polar_sampling: "2.5 mm SNR 12: in-plane 0.4%, flow -0.5% (test3)"
+    frame: "no flips with parallel transport, 88 with Frenet (test3)"
+
+timing:
+  phase_normalisation: "fourier"   # if retrospective gating covers the whole RR; "linear" if prospective - confirm on pilot case
+  phases: 20
+  phase_evidence: "mean flow < 0.1% both methods; peak flow linear -1 to -12%, Fourier < 0.3% (test4)"
+  pwv_method: "intersecting-tangent foot, regression of arrival time on centreline distance over all planes"
+  pwv_evidence: "bias within 4%; IQR 11% at 4 m/s, 34-43% at 12 m/s; regression halves two-plane spread (test5)"
 
 wss:
   computed: true
