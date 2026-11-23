@@ -1,0 +1,97 @@
+# =====================================================================
+#  LDS 4D Flow MRI pipeline - locked processing settings
+#  Version: v1.0 (frozen from phantom validation)
+#  Owner: Emily Gan    Supervisor: Dr Muhammad Usman
+#
+#  Rule: once frozen, these settings are applied unchanged to every
+#  subject. Any change after 17 Jan (data verified) is logged in the
+#  CHANGE LOG at the bottom, with the reason, and all subjects are
+#  re-run. Settings are never tuned on LDS data.
+#
+#  Fields marked  # FILL  are completed from the pilot case.
+# =====================================================================
+
+software:
+  # Filled automatically by record_versions.py - do not type by hand
+  slicer_version: null
+  slicer_revision: null
+  slicerheart_4dflow: "0.5.2"
+  python: null
+  os: null
+  run_location: "Imperial Secure Enclave"      # phantom runs: "local"
+  phantom_validation_run: "2026-11-13 and 2026-11-23, Python library outside Slicer, digital phantoms only"
+
+input:
+  vendor: null                 # FILL when pilot case arrives (Siemens / Philips / GE)
+  sequence: null               # FILL from pilot case protocol
+  venc_cm_s: null              # read from DICOM per subject, record here if fixed
+  velocity_encoding_check: true   # confirm sign convention / axis order on pilot case
+  cardiac_phases_native: null  # FILL from pilot case
+
+background_correction:
+  function: "correct_background_phase"
+  method: "war+msac"           # library default
+  polynomial_order: 2          # as Medis QFlow 4D and Pruitt 2019
+  inlier_threshold: "2.5 x robust sigma (1.4826 x MAD), library default"
+  static_tissue_mask: "static_tissue_candidates defaults: body mask by minimum-error split, quietest 25% of body voxels by temporal velocity SD, 3-voxel edge erosion, lumen dilated by 2 voxels"
+  phantom: "Digital chest phantom (ph.chest), 5 seeds"
+  phantom_evidence:            # mean residual |v| error in static tissue, mm/s (bg_res2.json)
+    none: 15.16
+    ols: 0.89
+    msac: 0.43
+    arto: 0.46
+    wrls: 0.21
+    war+msac: 0.23
+  rationale: "Joint lowest residual with WRLS (difference 0.02 mm/s, within seed SD 0.03), and rejects wrap-around voxels, which matters for in vivo FOVs"
+
+phase_unwrapping:
+  function: "unwrap_velocity"
+  method: "laplacian_then_temporal"
+  max_wraps: 3
+  apply_to: "all subjects"     # no effect when no aliasing (VENC 1000 run: error unchanged at -1.0%)
+  phantom: "Digital Womersley tube, radius 12 mm, 2.5 mm voxels, SNR 1.8, 5 seeds"
+  phantom_evidence: "VENC 600 mm/s, 9.7% of lumen voxels wrapped. Stroke-volume error -41.7% raw, -1.0% after unwrapping, 0% residual wrapped voxels"
+
+pc_mra:
+  function: "pcmra"
+  formula: "sqrt(mean_t mag^2 |v|^2), gamma = 1 (Bock 2010)"
+  threshold: "none - lumen mask comes from segmentation, not from thresholding the PC-MRA"   # confirm
+  role: "Angiogram for segmentation and QC only, not a study outcome"
+
+segmentation:
+  primary: "TotalSegmentator MRI"
+  manual_correction: "ITK-SNAP"
+  stretch_goal: "nnU-Net"
+  qc: "Visual check of every mask, Dice against manual on a subset"
+
+centreline_and_planes:
+  centreline: "VMTK"
+  n_planes: 20                 # 8 ascending, 4 arch, 8 descending (Ruiz-Munoz [7], Garrido-Oliver [9])
+  regions: {ascending: 8, arch: 4, descending: 8}
+  sampling_grid: {radial: 16, circumferential: 32}
+  temporal_phases: 20          # resampled, normalised to RR interval
+  local_frame: "axial / radial / circumferential, parallel transport along centreline"
+
+wss:
+  computed: true
+  use_in_primary_analysis: false
+  function: "wall_shear_stress"
+  fit: "quadratic"
+  viscosity_pa_s: 0.0035
+  phantom_evidence:            # % error vs analytic, noise-free, wss_res.json
+    pulsatile_peak: {0.5mm: -12.0, 1.0mm: -38.9, 2.0mm: -58.7, 2.5mm: -64.9}
+    pulsatile_tawss: {0.5mm: -8.3, 1.0mm: -30.3, 2.0mm: -44.1, 2.5mm: -49.7}
+    steady: {0.5mm: 3.7, 1.0mm: -5.1, 2.0mm: -5.1, 2.5mm: -13.4}
+  rationale: "Reported descriptively only because of voxel-size bias"
+
+qc_outputs_per_case:
+  - magnitude_screenshot
+  - pc_mra_screenshot
+  - background_map_before_after
+  - plane_velocity_profiles
+  - processing_log
+
+# ---------------------------------------------------------------------
+# CHANGE LOG  (date | field | old -> new | reason | subjects re-run)
+# ---------------------------------------------------------------------
+changes: []

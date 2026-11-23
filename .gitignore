@@ -1,0 +1,36 @@
+# ---------------------------------------------------------------
+# NO PATIENT DATA OR ANYTHING DERIVED FROM IT IS EVER COMMITTED.
+# Imaging, masks, plane samples, features, QC images and logs from
+# real subjects stay inside the Imperial Secure Enclave.
+# ---------------------------------------------------------------
+data/
+outputs/
+subjects/
+qc/
+*.dcm
+*.DCM
+*.ima
+*.nii
+*.nii.gz
+*.nrrd
+*.seq.nrrd
+*.mha
+*.mhd
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.csv
+*.xlsx
+*.log
+local_paths.yaml
+
+# Python / OS
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+.DS_Store
+Thumbs.db

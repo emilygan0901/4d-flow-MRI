@@ -1,0 +1,5 @@
+# Versions used for the phantom validation (Nov 2026)
+slicerheart_4dflow==0.5.2
+numpy==2.5.3
+scipy==1.18.1
+pyyaml==6.0.3
