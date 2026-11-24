@@ -88,6 +88,33 @@ python validation/phantom/test7_divergence_free_wss.py
 
 Results are written to `validation/results/`.
 
+## Clinical dry run
+
+`validation/clinical/dry_run.py` runs the locked settings on the 15 public,
+anonymised clinical cases of the SlicerHeart project (CC BY 4.0, Siemens
+Avanto fit, paediatric and congenital patients, 1.4-1.8 mm voxels, 12-30
+frames). These are not study data. Aortic plane flows are compared with
+Circle cvi42, measured independently by the data set authors
+(`summarise_dry_run.py`, 29 planes).
+
+| Check | Result |
+|---|---|
+| Cases processed | 15/15, 3-20 s each |
+| Velocity encoding consistent | 15/15 |
+| Gating coverage of the RR interval | 99-101% in all cases (retrospective), so Fourier phase normalisation applies |
+| Net flow vs cvi42, locked settings | bias -0.7 mL (-2.6%), 95% limits -4.8 to +3.5 mL, mean absolute difference 12% |
+| Net flow vs cvi42, SlicerHeart's own outputs | bias -1.0 mL, limits -4.5 to +2.4 mL, mean absolute difference 13% |
+| Net flow vs cvi42, no background correction | bias +0.1 mL, limits -8.0 to +8.2 mL |
+| Agreement by vessel radius | median absolute difference 9.9% below 5 mm radius, 5.9% above 8 mm |
+| Polar grid flow vs plane flow | -2.6% median above 8 mm radius, -8.8% below 5 mm |
+
+Background correction halves the limits of agreement; OLS, MSAC and WAR+MSAC
+give the same result on these data. Agreement improves with vessel size,
+and adult aortas (radius about 12-20 mm) are larger than any vessel here.
+The polar grid assumes a circular lumen of equal area, so it misses some
+flow in small or non-circular vessels: it is used as the input to the
+autoencoder, and flow outcomes are measured with `plane_flow`.
+
 ## Settings policy
 
 The settings in `config/pipeline_config.yaml` were fixed from the phantom
@@ -97,5 +124,4 @@ of the file, with the reason, and all subjects are re-processed.
 
 ## Next steps
 
-- Dry run on the public `slicerheart_4dflow` clinical test cases
 - Batch pipeline and per-case QC report

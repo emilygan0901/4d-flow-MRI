@@ -1,0 +1,1279 @@
+{
+ "dataset": "SlicerHeart clinical test data rev002 (CC BY 4.0)",
+ "rows": [
+  {
+   "case": "Patient0001",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 19,
+   "rr_ms": 668.0,
+   "frame_ms": 35.1578947368421,
+   "gating_coverage": 0.9975670658682636,
+   "venc_mm_s": [
+    2000.0,
+    2000.0,
+    2000.0
+   ],
+   "voxel_mm": [
+    1.375,
+    1.375,
+    1.4000000423855214
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 5.635437488555908,
+   "process_s": 14.520110607147217,
+   "planes": {
+    "Ao": {
+     "net_mL": 26.24948550423268,
+     "peak_flow_mL_s": 183.03275828142412,
+     "net_mL_ols": 27.88546739594767,
+     "net_mL_msac": 27.067073972981856,
+     "net_mL_none": 30.703487264103064,
+     "library_net_mL": 28.910476967651057,
+     "cvi42_net_mL": 30.64,
+     "lumen_radius_mm": 13.839231302395463,
+     "grid_net_mL": 24.09934782867221,
+     "inplane_to_axial_peak": 0.7395992867621379,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 5.379870299871593,
+     "peak_flow_mL_s": 56.05980832844486,
+     "net_mL_ols": 5.2149898281401095,
+     "net_mL_msac": 5.285132682603117,
+     "net_mL_none": 4.949922343570058,
+     "library_net_mL": 4.950041589353879,
+     "cvi42_net_mL": 6.65,
+     "lumen_radius_mm": 4.906341319420121,
+     "grid_net_mL": 4.01908853105007,
+     "inplane_to_axial_peak": 0.25726419492033137,
+     "grid_outside_fov": 0.0
+    },
+    "Ao_prox": {
+     "net_mL": 29.0143727973303,
+     "peak_flow_mL_s": 209.6487519009152,
+     "net_mL_ols": 30.859672381377848,
+     "net_mL_msac": 30.023850734640178,
+     "net_mL_none": 33.721032826776295,
+     "library_net_mL": 31.572382767708078
+    },
+    "Ao_dist": {
+     "net_mL": 25.09021899367619,
+     "peak_flow_mL_s": 177.69868806504596,
+     "net_mL_ols": 26.268642855580584,
+     "net_mL_msac": 25.613784239235983,
+     "net_mL_none": 28.507335683264447,
+     "library_net_mL": 25.564663292206124
+    },
+    "DAo_prox": {
+     "net_mL": 5.153928964589692,
+     "peak_flow_mL_s": 57.096453514598764,
+     "net_mL_ols": 4.9484806628620275,
+     "net_mL_msac": 5.048718921572527,
+     "net_mL_none": 4.5708215265755054,
+     "library_net_mL": 5.092529061260057
+    },
+    "DAo_dist": {
+     "net_mL": 4.442060807494964,
+     "peak_flow_mL_s": 49.58558191107554,
+     "net_mL_ols": 4.30187119755669,
+     "net_mL_msac": 4.353480146740032,
+     "net_mL_none": 4.111340943640844,
+     "library_net_mL": 4.521876987256549
+    }
+   },
+   "conservation_spread_pct": {
+    "Ao": 14.650733114273255,
+    "DAo": 18.78642337476366
+   }
+  },
+  {
+   "case": "Patient0002",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 26,
+   "rr_ms": 902.0,
+   "frame_ms": 34.69230769230769,
+   "gating_coverage": 0.9957174057649668,
+   "venc_mm_s": [
+    1500.0,
+    1500.0,
+    1500.0
+   ],
+   "voxel_mm": [
+    1.625000000000001,
+    1.625000000000001,
+    1.5999999576144786
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 7.478174209594727,
+   "process_s": 18.63253927230835,
+   "planes": {
+    "Ao": {
+     "net_mL": 27.705070380078052,
+     "peak_flow_mL_s": 143.303795942922,
+     "net_mL_ols": 27.849868824325846,
+     "net_mL_msac": 27.867834986292756,
+     "net_mL_none": 30.846747714312826,
+     "library_net_mL": 29.762374738882624,
+     "cvi42_net_mL": 32.21,
+     "lumen_radius_mm": 9.96046284413459,
+     "grid_net_mL": 28.827990273395525,
+     "inplane_to_axial_peak": 0.5442623627113761,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 12.739364766385053,
+     "peak_flow_mL_s": 54.23530871046235,
+     "net_mL_ols": 12.726751385251163,
+     "net_mL_msac": 12.725008761477227,
+     "net_mL_none": 13.379417565840457,
+     "library_net_mL": 13.16609709001816,
+     "cvi42_net_mL": 18.03,
+     "lumen_radius_mm": 3.721941094747261,
+     "grid_net_mL": 11.911799596638893,
+     "inplane_to_axial_peak": 0.02844131645396364,
+     "grid_outside_fov": 0.0
+    },
+    "Ao_prox": {
+     "net_mL": 39.697659671174875,
+     "peak_flow_mL_s": 155.7021316608853,
+     "net_mL_ols": 39.869835208597905,
+     "net_mL_msac": 39.89049003575014,
+     "net_mL_none": 42.94675467630663,
+     "library_net_mL": 30.545732181995824
+    },
+    "Ao_dist": {
+     "net_mL": 21.014438595696063,
+     "peak_flow_mL_s": 128.18499847057768,
+     "net_mL_ols": 21.141548683694232,
+     "net_mL_msac": 21.158243293591443,
+     "net_mL_none": 23.871825240794927,
+     "library_net_mL": 27.881679832706105
+    },
+    "DAo_prox": {
+     "net_mL": 13.993029048165065,
+     "peak_flow_mL_s": 60.080882358540606,
+     "net_mL_ols": 13.97669506598163,
+     "net_mL_msac": 13.974347319770429,
+     "net_mL_none": 14.658980629131168,
+     "library_net_mL": 13.605810348749845
+    }
+   },
+   "conservation_spread_pct": {
+    "Ao": 63.39228464806822,
+    "DAo": 9.379364156289341
+   }
+  },
+  {
+   "case": "Patient0003",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 15,
+   "rr_ms": 507.0,
+   "frame_ms": 33.8,
+   "gating_coverage": 0.9936706114398423,
+   "venc_mm_s": [
+    1500.0,
+    1500.0,
+    1500.0
+   ],
+   "voxel_mm": [
+    1.375,
+    1.375,
+    1.399999976158135
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 3.4675209522247314,
+   "process_s": 8.300911903381348,
+   "planes": {
+    "Ao": {
+     "net_mL": 18.276487350807336,
+     "peak_flow_mL_s": 116.81966130393242,
+     "net_mL_ols": 18.300444296609633,
+     "net_mL_msac": 18.23977319971117,
+     "net_mL_none": 18.775824436715858,
+     "library_net_mL": 17.28485753743543,
+     "cvi42_net_mL": 16.116,
+     "lumen_radius_mm": 8.173145891934846,
+     "grid_net_mL": 17.723108128167418,
+     "inplane_to_axial_peak": 0.2895189982516545,
+     "grid_outside_fov": 0.0
+    },
+    "Aortic Valve": {
+     "net_mL": 18.29790408641745,
+     "peak_flow_mL_s": 122.01123321812855,
+     "net_mL_ols": 18.339366408147804,
+     "net_mL_msac": 18.26717949464269,
+     "net_mL_none": 18.633381763351835,
+     "library_net_mL": 17.108969527519093,
+     "cvi42_net_mL": 17.989,
+     "lumen_radius_mm": 8.559772983434689,
+     "grid_net_mL": 17.89629066658432,
+     "inplane_to_axial_peak": 0.2312336449162771,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 6.740336937075778,
+     "peak_flow_mL_s": 38.0209732964441,
+     "net_mL_ols": 6.753179602079797,
+     "net_mL_msac": 6.761675377367055,
+     "net_mL_none": 7.174377205494893,
+     "library_net_mL": 5.837843683624473,
+     "cvi42_net_mL": 7.035,
+     "lumen_radius_mm": 3.9173993960839435,
+     "grid_net_mL": 5.4024764376896774,
+     "inplane_to_axial_peak": 0.049496787254839116,
+     "grid_outside_fov": 0.0
+    },
+    "Ao_prox": {
+     "net_mL": 18.718343601069336,
+     "peak_flow_mL_s": 120.77464221310511,
+     "net_mL_ols": 18.737036363494767,
+     "net_mL_msac": 18.672337919226504,
+     "net_mL_none": 19.185325250879227,
+     "library_net_mL": 17.407517122526382
+    },
+    "Ao_dist": {
+     "net_mL": 16.563206468547886,
+     "peak_flow_mL_s": 116.82099988929008,
+     "net_mL_ols": 16.59087110504346,
+     "net_mL_msac": 16.543195307080836,
+     "net_mL_none": 16.977302644485416,
+     "library_net_mL": 15.099641458254355
+    },
+    "Aortic Valve_prox": {
+     "net_mL": 17.72909724234581,
+     "peak_flow_mL_s": 102.28176259942236,
+     "net_mL_ols": 17.746046347738808,
+     "net_mL_msac": 17.70006906905205,
+     "net_mL_none": 17.891982789066137,
+     "library_net_mL": 14.992921419641315
+    },
+    "Aortic Valve_dist": {
+     "net_mL": 17.37812520284998,
+     "peak_flow_mL_s": 112.90047023182456,
+     "net_mL_ols": 17.426267813399665,
+     "net_mL_msac": 17.352992466177813,
+     "net_mL_none": 17.80688405164135,
+     "library_net_mL": 16.523529211191867
+    },
+    "DAo_prox": {
+     "net_mL": 6.996264164479205,
+     "peak_flow_mL_s": 40.431048070980445,
+     "net_mL_ols": 7.00693908520693,
+     "net_mL_msac": 7.017734057191108,
+     "net_mL_none": 7.433862256457639,
+     "library_net_mL": 6.381448696902852
+    },
+    "DAo_dist": {
+     "net_mL": 7.409596153662461,
+     "peak_flow_mL_s": 43.31576946200722,
+     "net_mL_ols": 7.426582703405392,
+     "net_mL_msac": 7.4339978257180315,
+     "net_mL_none": 7.896023171436072,
+     "library_net_mL": 6.610771485438919
+    }
+   },
+   "conservation_spread_pct": {
+    "Ao": 12.071785504034807,
+    "Aortic Valve": 5.166801073056196,
+    "DAo": 9.494745677096462
+   }
+  },
+  {
+   "case": "Patient0004",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 12,
+   "rr_ms": 370.0,
+   "frame_ms": 30.833333333333332,
+   "gating_coverage": 0.9926867567567567,
+   "venc_mm_s": [
+    1500.0,
+    1500.0,
+    1500.0
+   ],
+   "voxel_mm": [
+    1.6249999999999998,
+    1.6249999999999998,
+    1.6000000238418568
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 2.2876129150390625,
+   "process_s": 7.071297883987427,
+   "planes": {
+    "Ao": {
+     "net_mL": 3.5844196704937636,
+     "peak_flow_mL_s": 37.5902887961291,
+     "net_mL_ols": 3.6163968694851985,
+     "net_mL_msac": 3.590737792814518,
+     "net_mL_none": 3.766141589988759,
+     "library_net_mL": 3.3615246613847427,
+     "cvi42_net_mL": 3.0,
+     "lumen_radius_mm": 4.580719192722603,
+     "grid_net_mL": 3.058971950795944,
+     "inplane_to_axial_peak": 0.2330689724741243,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 0.626693011576192,
+     "peak_flow_mL_s": 20.84009109998494,
+     "net_mL_ols": 0.6410143740034334,
+     "net_mL_msac": 0.6436062841588547,
+     "net_mL_none": 0.7849475364099047,
+     "library_net_mL": 0.552064737600451,
+     "cvi42_net_mL": 0.64,
+     "lumen_radius_mm": 3.960594861712782,
+     "grid_net_mL": 0.3937634566728999,
+     "inplane_to_axial_peak": 0.18665260527999503,
+     "grid_outside_fov": 0.0
+    },
+    "Ao_dist": {
+     "net_mL": 3.442882447937664,
+     "peak_flow_mL_s": 36.953638432334095,
+     "net_mL_ols": 3.4722828454588823,
+     "net_mL_msac": 3.4482043436127006,
+     "net_mL_none": 3.621437764231058,
+     "library_net_mL": 3.129287799239339
+    },
+    "DAo_prox": {
+     "net_mL": 0.7241282814972821,
+     "peak_flow_mL_s": 21.406259456649458,
+     "net_mL_ols": 0.7391018173002072,
+     "net_mL_msac": 0.7425711395472604,
+     "net_mL_none": 0.8829410281993414,
+     "library_net_mL": 0.7200960546047768
+    },
+    "DAo_dist": {
+     "net_mL": 0.6749686363594636,
+     "peak_flow_mL_s": 21.064330051462136,
+     "net_mL_ols": 0.6921187150965917,
+     "net_mL_msac": 0.694559054791204,
+     "net_mL_none": 0.8722483280188803,
+     "library_net_mL": 0.6317632105785077
+    }
+   },
+   "conservation_spread_pct": {
+    "Ao": 4.028209408696733,
+    "DAo": 14.429226126377936
+   }
+  },
+  {
+   "case": "Patient0005",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 17,
+   "rr_ms": 848.9999999999999,
+   "frame_ms": 49.94117647058823,
+   "gating_coverage": 1.008512249705536,
+   "venc_mm_s": [
+    1500.0,
+    1500.0,
+    1500.0
+   ],
+   "voxel_mm": [
+    1.7500000000000004,
+    1.7500000000000004,
+    1.8000000000000003
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 6.072375535964966,
+   "process_s": 19.10346293449402,
+   "planes": {
+    "DAo": {
+     "net_mL": 45.23341767266346,
+     "peak_flow_mL_s": 197.5576215437027,
+     "net_mL_ols": 45.37644716390979,
+     "net_mL_msac": 45.310476645684815,
+     "net_mL_none": 48.80557448771855,
+     "library_net_mL": 44.57749936693109,
+     "cvi42_net_mL": 44.52,
+     "lumen_radius_mm": 8.304745623466053,
+     "grid_net_mL": 44.73984009590619,
+     "inplane_to_axial_peak": 0.0632813075903346,
+     "grid_outside_fov": 0.0
+    },
+    "DAo_prox": {
+     "net_mL": 43.883614690115124,
+     "peak_flow_mL_s": 187.39134870718522,
+     "net_mL_ols": 44.017959021292214,
+     "net_mL_msac": 43.95775327686668,
+     "net_mL_none": 46.92180750182796,
+     "library_net_mL": 43.17099450938839
+    },
+    "DAo_dist": {
+     "net_mL": 44.922795519614105,
+     "peak_flow_mL_s": 203.9115202407017,
+     "net_mL_ols": 45.05580300336712,
+     "net_mL_msac": 44.99295505370547,
+     "net_mL_none": 48.51607639889023,
+     "library_net_mL": 43.20144662308519
+    }
+   },
+   "conservation_spread_pct": {
+    "DAo": 3.0210490505836614
+   }
+  },
+  {
+   "case": "Patient0006",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 16,
+   "rr_ms": 514.0,
+   "frame_ms": 32.125,
+   "gating_coverage": 0.9940149805447471,
+   "venc_mm_s": [
+    2000.0,
+    2000.0,
+    2000.0
+   ],
+   "voxel_mm": [
+    1.3750000000000004,
+    1.3750000000000009,
+    1.3999999761581428
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 2.6024091243743896,
+   "process_s": 9.091392278671265,
+   "planes": {},
+   "conservation_spread_pct": {}
+  },
+  {
+   "case": "Patient0007",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 22,
+   "rr_ms": 707.0,
+   "frame_ms": 32.13636363636363,
+   "gating_coverage": 0.9987613861386138,
+   "venc_mm_s": [
+    1500.0,
+    1500.0,
+    1500.0
+   ],
+   "voxel_mm": [
+    1.6249999999999996,
+    1.6249999999999996,
+    1.6000000238418617
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 5.542167663574219,
+   "process_s": 13.677777528762817,
+   "planes": {
+    "Ao": {
+     "net_mL": 32.38191878794446,
+     "peak_flow_mL_s": 149.37107289412106,
+     "net_mL_ols": 33.55850775026347,
+     "net_mL_msac": 33.769632202669996,
+     "net_mL_none": 34.74049153458868,
+     "library_net_mL": 29.172038882255077,
+     "cvi42_net_mL": 30.94,
+     "lumen_radius_mm": 10.05207905269042,
+     "grid_net_mL": 30.90444352436332,
+     "inplane_to_axial_peak": 0.22731765667048276,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 8.393812880919842,
+     "peak_flow_mL_s": 41.52410571967265,
+     "net_mL_ols": 8.307820709804341,
+     "net_mL_msac": 8.328367860921892,
+     "net_mL_none": 8.727109675462069,
+     "library_net_mL": 7.615612724241383,
+     "cvi42_net_mL": 9.24,
+     "lumen_radius_mm": 3.2858897822556425,
+     "grid_net_mL": 8.149013872444403,
+     "inplane_to_axial_peak": 0.07415525290532379,
+     "grid_outside_fov": 0.0
+    },
+    "Ao_prox": {
+     "net_mL": 26.419225998801267,
+     "peak_flow_mL_s": 141.17994313805755,
+     "net_mL_ols": 27.689092201859275,
+     "net_mL_msac": 27.918820694302404,
+     "net_mL_none": 28.876108875488594,
+     "library_net_mL": 30.08625515937518
+    },
+    "Ao_dist": {
+     "net_mL": 27.05254150047141,
+     "peak_flow_mL_s": 136.43226779622682,
+     "net_mL_ols": 27.956171580651638,
+     "net_mL_msac": 28.118347065571353,
+     "net_mL_none": 28.925899363054004,
+     "library_net_mL": 27.41412535372279
+    },
+    "DAo_prox": {
+     "net_mL": 9.049254779616108,
+     "peak_flow_mL_s": 45.58991790774265,
+     "net_mL_ols": 8.942757704929889,
+     "net_mL_msac": 8.966987230964428,
+     "net_mL_none": 9.402540309402818,
+     "library_net_mL": 8.323468483019644
+    },
+    "DAo_dist": {
+     "net_mL": 8.755787136034694,
+     "peak_flow_mL_s": 43.92320341823471,
+     "net_mL_ols": 8.677781689934472,
+     "net_mL_msac": 8.697883870981043,
+     "net_mL_none": 9.106861079104402,
+     "library_net_mL": 7.777794232666061
+    }
+   },
+   "conservation_spread_pct": {
+    "Ao": 20.835539090990615,
+    "DAo": 7.50538796965348
+   }
+  },
+  {
+   "case": "Patient0008",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 21,
+   "rr_ms": 710.0,
+   "frame_ms": 33.80952380952381,
+   "gating_coverage": 0.9951042253521126,
+   "venc_mm_s": [
+    1500.0,
+    1500.0,
+    1500.0
+   ],
+   "voxel_mm": [
+    1.6250000000000002,
+    1.6250000000000002,
+    1.5999999999999999
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 4.229649305343628,
+   "process_s": 11.48345136642456,
+   "planes": {
+    "Ao": {
+     "net_mL": 24.176620172770505,
+     "peak_flow_mL_s": 111.32808643168238,
+     "net_mL_ols": 23.704794936124404,
+     "net_mL_msac": 23.89577360462504,
+     "net_mL_none": 24.48140547671067,
+     "library_net_mL": 19.230524291816558,
+     "cvi42_net_mL": 22.36,
+     "lumen_radius_mm": 6.90435287010191,
+     "grid_net_mL": 21.302913216385484,
+     "inplane_to_axial_peak": 0.20073885088006943,
+     "grid_outside_fov": 0.0
+    },
+    "Aortic Valve": {
+     "net_mL": 24.471513998755793,
+     "peak_flow_mL_s": 139.2514187823422,
+     "net_mL_ols": 23.12261942284477,
+     "net_mL_msac": 23.6561633264388,
+     "net_mL_none": 24.41676692272949,
+     "library_net_mL": 23.154562377377115,
+     "cvi42_net_mL": 26.94,
+     "lumen_radius_mm": 9.659347485114752,
+     "grid_net_mL": 27.02086711337955,
+     "inplane_to_axial_peak": 0.2859700493112621,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 11.698323047367753,
+     "peak_flow_mL_s": 57.72842054566618,
+     "net_mL_ols": 11.894132853574007,
+     "net_mL_msac": 11.774200116085542,
+     "net_mL_none": 12.907260797761563,
+     "library_net_mL": 11.69178544769493,
+     "cvi42_net_mL": 10.9,
+     "lumen_radius_mm": 4.28189787876665,
+     "grid_net_mL": 10.669707999176202,
+     "inplane_to_axial_peak": 0.07647525462142211,
+     "grid_outside_fov": 0.0
+    },
+    "Ao_prox": {
+     "net_mL": 30.250957555296267,
+     "peak_flow_mL_s": 127.49588466279755,
+     "net_mL_ols": 29.580166918420787,
+     "net_mL_msac": 29.855115208110316,
+     "net_mL_none": 30.53440827118265,
+     "library_net_mL": 22.620708647361944
+    },
+    "Ao_dist": {
+     "net_mL": 21.673044569514914,
+     "peak_flow_mL_s": 107.13072694036383,
+     "net_mL_ols": 21.28146417419862,
+     "net_mL_msac": 21.436855936609735,
+     "net_mL_none": 22.058473391220446,
+     "library_net_mL": 19.122860581422295
+    },
+    "Aortic Valve_dist": {
+     "net_mL": 25.554897961027248,
+     "peak_flow_mL_s": 153.00993053313084,
+     "net_mL_ols": 24.167724476705114,
+     "net_mL_msac": 24.70885222315167,
+     "net_mL_none": 25.775022309100578,
+     "library_net_mL": 25.245384856796335
+    },
+    "DAo_prox": {
+     "net_mL": 12.08748841021492,
+     "peak_flow_mL_s": 59.19898001730706,
+     "net_mL_ols": 12.321923307877478,
+     "net_mL_msac": 12.18155913488611,
+     "net_mL_none": 13.465665726849423,
+     "library_net_mL": 12.247332579858412
+    },
+    "DAo_dist": {
+     "net_mL": 11.758992134059609,
+     "peak_flow_mL_s": 58.27336331482358,
+     "net_mL_ols": 11.927870200146094,
+     "net_mL_msac": 11.821509314141071,
+     "net_mL_none": 12.870853140108228,
+     "library_net_mL": 11.61911123345196
+    }
+   },
+   "conservation_spread_pct": {
+    "Ao": 33.81541199060842,
+    "Aortic Valve": 4.33124791417143,
+    "DAo": 3.2845760014721765
+   }
+  },
+  {
+   "case": "Patient0009",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 20,
+   "rr_ms": 683.0,
+   "frame_ms": 34.15,
+   "gating_coverage": 0.9953976573938508,
+   "venc_mm_s": [
+    1500.0,
+    1500.0,
+    1500.0
+   ],
+   "voxel_mm": [
+    1.625000000000001,
+    1.625000000000001,
+    1.5999999576144786
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 4.833560943603516,
+   "process_s": 14.813527345657349,
+   "planes": {
+    "Ao": {
+     "net_mL": 17.918673289775974,
+     "peak_flow_mL_s": 106.79274840249721,
+     "net_mL_ols": 17.680167842422104,
+     "net_mL_msac": 17.68257452041956,
+     "net_mL_none": 17.946392508540544,
+     "library_net_mL": 19.570305751694576,
+     "cvi42_net_mL": 22.758,
+     "lumen_radius_mm": 7.712700459525094,
+     "grid_net_mL": 17.883581844193923,
+     "inplane_to_axial_peak": 0.27134173117069676,
+     "grid_outside_fov": 0.0
+    },
+    "AoV-NEW": {
+     "net_mL": 25.70705913524733,
+     "peak_flow_mL_s": 142.57337666995187,
+     "net_mL_ols": 25.490553422891214,
+     "net_mL_msac": 25.489543454758586,
+     "net_mL_none": 25.75691595247978,
+     "library_net_mL": 24.178478959923634,
+     "cvi42_net_mL": 26.357,
+     "lumen_radius_mm": 9.315793190661061,
+     "grid_net_mL": 18.68675919101637,
+     "inplane_to_axial_peak": 0.3684412555181003,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 11.412087152963498,
+     "peak_flow_mL_s": 62.86817563317722,
+     "net_mL_ols": 11.451235762448066,
+     "net_mL_msac": 11.456632156647304,
+     "net_mL_none": 13.252162554732443,
+     "library_net_mL": 11.12686091626339,
+     "cvi42_net_mL": 12.35,
+     "lumen_radius_mm": 5.263619574545341,
+     "grid_net_mL": 10.91164904741241,
+     "inplane_to_axial_peak": 0.038137512864154004,
+     "grid_outside_fov": 0.0
+    },
+    "Ao_prox": {
+     "net_mL": 26.463488638752523,
+     "peak_flow_mL_s": 126.45857249708438,
+     "net_mL_ols": 26.173633353754227,
+     "net_mL_msac": 26.177364653337854,
+     "net_mL_none": 26.39828854495011,
+     "library_net_mL": 21.99463292214024
+    },
+    "Ao_dist": {
+     "net_mL": 20.835175678287015,
+     "peak_flow_mL_s": 109.2200266434677,
+     "net_mL_ols": 20.58845570725643,
+     "net_mL_msac": 20.589886857660307,
+     "net_mL_none": 20.963513796754555,
+     "library_net_mL": 19.960872182910553
+    },
+    "AoV-NEW_prox": {
+     "net_mL": 21.678391710128015,
+     "peak_flow_mL_s": 118.2184771837498,
+     "net_mL_ols": 21.514519389936474,
+     "net_mL_msac": 21.514512313978344,
+     "net_mL_none": 21.66593743101185,
+     "library_net_mL": 21.12279054364786
+    },
+    "AoV-NEW_dist": {
+     "net_mL": 27.455712257086965,
+     "peak_flow_mL_s": 141.94411952866275,
+     "net_mL_ols": 27.188227935280352,
+     "net_mL_msac": 27.18547804531912,
+     "net_mL_none": 27.611004627786155,
+     "library_net_mL": 26.145663744458957
+    },
+    "DAo_prox": {
+     "net_mL": 11.326923747332582,
+     "peak_flow_mL_s": 63.22339832573188,
+     "net_mL_ols": 11.371959695467298,
+     "net_mL_msac": 11.37772279319686,
+     "net_mL_none": 13.089459131101172,
+     "library_net_mL": 11.226338884541741
+    },
+    "DAo_dist": {
+     "net_mL": 11.476817359475323,
+     "peak_flow_mL_s": 62.50747703163565,
+     "net_mL_ols": 11.505639302536476,
+     "net_mL_msac": 11.510086669785641,
+     "net_mL_none": 13.17199825338186,
+     "library_net_mL": 11.182680202030854
+    }
+   },
+   "conservation_spread_pct": {
+    "Ao": 39.30618296851592,
+    "AoV-NEW": 23.158327479689614,
+    "DAo": 1.3142479936892986
+   }
+  },
+  {
+   "case": "Patient0010",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 30,
+   "rr_ms": 1039.0,
+   "frame_ms": 34.63333333333333,
+   "gating_coverage": 0.9975596727622714,
+   "venc_mm_s": [
+    1500.0,
+    1500.0,
+    1500.0
+   ],
+   "voxel_mm": [
+    1.7187499999999993,
+    1.7187499999999993,
+    1.700000047683715
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 8.79126262664795,
+   "process_s": 19.882093906402588,
+   "planes": {
+    "Ao": {
+     "net_mL": -68.57357667536208,
+     "peak_flow_mL_s": 374.9290070488582,
+     "net_mL_ols": -68.54983820580028,
+     "net_mL_msac": -68.44717132134919,
+     "net_mL_none": -78.37439033911032,
+     "library_net_mL": -67.71097226481184,
+     "cvi42_net_mL": -68.24,
+     "lumen_radius_mm": 14.37883987659165,
+     "grid_net_mL": -65.57023899219409,
+     "inplane_to_axial_peak": 0.4434374400439678,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 38.12625854416848,
+     "peak_flow_mL_s": 174.83851867449857,
+     "net_mL_ols": 38.19184495129658,
+     "net_mL_msac": 38.199065337822724,
+     "net_mL_none": 50.26941474020797,
+     "library_net_mL": 38.064892948018425,
+     "cvi42_net_mL": 34.49,
+     "lumen_radius_mm": 11.921701376213083,
+     "grid_net_mL": 40.27062272970424,
+     "inplane_to_axial_peak": 0.3576781241870801,
+     "grid_outside_fov": 0.0
+    },
+    "Ao_prox": {
+     "net_mL": -65.60683504331486,
+     "peak_flow_mL_s": 352.8681387431173,
+     "net_mL_ols": -65.55531116107684,
+     "net_mL_msac": -65.48320898069883,
+     "net_mL_none": -74.69291230180738,
+     "library_net_mL": -64.79968034225566
+    },
+    "Ao_dist": {
+     "net_mL": -77.33378766394284,
+     "peak_flow_mL_s": 402.0978215514008,
+     "net_mL_ols": -77.3441515355464,
+     "net_mL_msac": -77.18688829555225,
+     "net_mL_none": -89.51553476767718,
+     "library_net_mL": -77.27257731436794
+    },
+    "DAo_prox": {
+     "net_mL": 33.199217262745194,
+     "peak_flow_mL_s": 164.99160603931998,
+     "net_mL_ols": 33.294777847855414,
+     "net_mL_msac": 33.31864517415881,
+     "net_mL_none": 44.430378626596706,
+     "library_net_mL": 33.56920694933598
+    },
+    "DAo_dist": {
+     "net_mL": 42.905505125679795,
+     "peak_flow_mL_s": 175.3265914828948,
+     "net_mL_ols": 42.9472744519978,
+     "net_mL_msac": 42.932442443528046,
+     "net_mL_none": 55.740165453994,
+     "library_net_mL": 42.881764320925015
+    }
+   },
+   "conservation_spread_pct": {
+    "Ao": 16.632858675479913,
+    "DAo": 25.49121381176491
+   }
+  },
+  {
+   "case": "Patient0011",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 14,
+   "rr_ms": 482.0,
+   "frame_ms": 34.42857142857143,
+   "gating_coverage": 0.9986512448132779,
+   "venc_mm_s": [
+    2000.0,
+    2000.0,
+    2000.0
+   ],
+   "voxel_mm": [
+    1.6249999999999998,
+    1.6249999999999998,
+    1.599999941312353
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 1.8010520935058594,
+   "process_s": 3.402123212814331,
+   "planes": {
+    "Ao": {
+     "net_mL": 5.039967962334096,
+     "peak_flow_mL_s": 35.17344867818147,
+     "net_mL_ols": 5.034866979248694,
+     "net_mL_msac": 5.062212419218098,
+     "net_mL_none": 5.247296156733796,
+     "library_net_mL": 4.1376031355209895,
+     "cvi42_net_mL": 7.8,
+     "lumen_radius_mm": 3.5824926614600625,
+     "grid_net_mL": 4.601834950748011,
+     "inplane_to_axial_peak": 0.20980961430128314,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 3.1260902268768644,
+     "peak_flow_mL_s": 25.14142459391449,
+     "net_mL_ols": 3.105743096787375,
+     "net_mL_msac": 3.106524271375057,
+     "net_mL_none": 3.0761971979110685,
+     "library_net_mL": 2.516681153246604,
+     "cvi42_net_mL": 1.92,
+     "lumen_radius_mm": 3.061215830645599,
+     "grid_net_mL": 2.5058284145813357,
+     "inplane_to_axial_peak": 0.20310166571346172,
+     "grid_outside_fov": 0.0
+    },
+    "DAo_prox": {
+     "net_mL": 2.9375050130785314,
+     "peak_flow_mL_s": 23.79260280645977,
+     "net_mL_ols": 2.919252665531233,
+     "net_mL_msac": 2.9201048772688813,
+     "net_mL_none": 2.8808640743181106,
+     "library_net_mL": 2.37173767496461
+    },
+    "DAo_dist": {
+     "net_mL": 2.153490380815353,
+     "peak_flow_mL_s": 17.58682019662771,
+     "net_mL_ols": 2.140236019991355,
+     "net_mL_msac": 2.1405922066883076,
+     "net_mL_none": 2.128911912465165,
+     "library_net_mL": 2.036138668167337
+    }
+   },
+   "conservation_spread_pct": {
+    "DAo": 35.508934345396895
+   }
+  },
+  {
+   "case": "Patient0012",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 15,
+   "rr_ms": 346.0,
+   "frame_ms": 23.066666666666666,
+   "gating_coverage": 0.9896531791907514,
+   "venc_mm_s": [
+    1500.0,
+    1500.0,
+    1500.0
+   ],
+   "voxel_mm": [
+    1.6250000000000004,
+    1.6250000000000004,
+    1.600000023841873
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 3.450993061065674,
+   "process_s": 6.398862600326538,
+   "planes": {
+    "AoV": {
+     "net_mL": 4.593787106636673,
+     "peak_flow_mL_s": 39.95773095695568,
+     "net_mL_ols": 4.607912002245305,
+     "net_mL_msac": 4.597960442882509,
+     "net_mL_none": 4.64596535360659,
+     "library_net_mL": 4.389628019863046,
+     "cvi42_net_mL": 5.1,
+     "lumen_radius_mm": 4.733816288701961,
+     "grid_net_mL": 4.717655703218608,
+     "inplane_to_axial_peak": 0.48757594609426747,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 2.3030911728736423,
+     "peak_flow_mL_s": 12.665800633907324,
+     "net_mL_ols": 2.2942299702813815,
+     "net_mL_msac": 2.2981342705810004,
+     "net_mL_none": 2.417797531131618,
+     "library_net_mL": 2.1190609349622704,
+     "cvi42_net_mL": 2.33,
+     "lumen_radius_mm": 2.9597108522359235,
+     "grid_net_mL": 2.0057505184592976,
+     "inplane_to_axial_peak": 0.323381447760057,
+     "grid_outside_fov": 0.0
+    },
+    "AoV_prox": {
+     "net_mL": 4.637441977167812,
+     "peak_flow_mL_s": 37.59199664895987,
+     "net_mL_ols": 4.650791353572549,
+     "net_mL_msac": 4.643132498706395,
+     "net_mL_none": 4.666867928864861,
+     "library_net_mL": 4.245522841309391
+    },
+    "AoV_dist": {
+     "net_mL": 4.3061815063766575,
+     "peak_flow_mL_s": 38.0241735919175,
+     "net_mL_ols": 4.317254131221212,
+     "net_mL_msac": 4.308476179396494,
+     "net_mL_none": 4.3605295285542365,
+     "library_net_mL": 4.251838320377712
+    },
+    "DAo_prox": {
+     "net_mL": 2.372153471271184,
+     "peak_flow_mL_s": 13.495630300708864,
+     "net_mL_ols": 2.3617444428158216,
+     "net_mL_msac": 2.3666479755327203,
+     "net_mL_none": 2.4992864815453206,
+     "library_net_mL": 2.334349282903237
+    },
+    "DAo_dist": {
+     "net_mL": 2.0185542739802114,
+     "peak_flow_mL_s": 10.633986224489771,
+     "net_mL_ols": 2.0110823118515277,
+     "net_mL_msac": 2.014187120316267,
+     "net_mL_none": 2.1220261716369726,
+     "library_net_mL": 2.0866901378737537
+    }
+   },
+   "conservation_spread_pct": {
+    "AoV": 7.3410007456984925,
+    "DAo": 15.847467258100002
+   }
+  },
+  {
+   "case": "Patient0013",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 20,
+   "rr_ms": 683.0,
+   "frame_ms": 34.15,
+   "gating_coverage": 1.0000942898975111,
+   "venc_mm_s": [
+    1500.0,
+    1500.0,
+    1500.0
+   ],
+   "voxel_mm": [
+    1.6249999999999998,
+    1.6249999999999998,
+    1.6000000238418568
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 3.9693241119384766,
+   "process_s": 9.615797996520996,
+   "planes": {
+    "Aortic Valve": {
+     "net_mL": -18.917533396553306,
+     "peak_flow_mL_s": 118.78934870503004,
+     "net_mL_ols": -18.55142170520304,
+     "net_mL_msac": -18.6775718276012,
+     "net_mL_none": -17.786238225080176,
+     "library_net_mL": -18.13123898982052,
+     "cvi42_net_mL": -18.71,
+     "lumen_radius_mm": 9.711930203877241,
+     "grid_net_mL": -20.15378729764784,
+     "inplane_to_axial_peak": 0.1792981998141652,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 7.109038466053918,
+     "peak_flow_mL_s": 38.831609697954406,
+     "net_mL_ols": 7.122966736057006,
+     "net_mL_msac": 7.1029462797586564,
+     "net_mL_none": 7.825304842621934,
+     "library_net_mL": 7.115564386999753,
+     "cvi42_net_mL": 7.47,
+     "lumen_radius_mm": 3.638913527397818,
+     "grid_net_mL": 6.595701212796126,
+     "inplane_to_axial_peak": 0.10543850912176356,
+     "grid_outside_fov": 0.0
+    },
+    "Aortic Valve_prox": {
+     "net_mL": -18.803885393361465,
+     "peak_flow_mL_s": 111.74402052654028,
+     "net_mL_ols": -18.519558616768855,
+     "net_mL_msac": -18.622759147613394,
+     "net_mL_none": -17.949641402836605,
+     "library_net_mL": -16.590547594440608
+    },
+    "Aortic Valve_dist": {
+     "net_mL": -18.2291814510046,
+     "peak_flow_mL_s": 126.14788956292313,
+     "net_mL_ols": -17.7985173403525,
+     "net_mL_msac": -17.93371572575453,
+     "net_mL_none": -16.840886315762926,
+     "library_net_mL": -18.424825393445836
+    },
+    "DAo_prox": {
+     "net_mL": 7.125410906395763,
+     "peak_flow_mL_s": 40.00833802293698,
+     "net_mL_ols": 7.13901046685522,
+     "net_mL_msac": 7.1183864283774065,
+     "net_mL_none": 7.796579656123294,
+     "library_net_mL": 7.033732445630465
+    },
+    "DAo_dist": {
+     "net_mL": 6.273435168741348,
+     "peak_flow_mL_s": 33.93571177484859,
+     "net_mL_ols": 6.285281103517432,
+     "net_mL_msac": 6.269527091051227,
+     "net_mL_none": 6.89481625533896,
+     "library_net_mL": 6.2845457244951595
+    }
+   },
+   "conservation_spread_pct": {
+    "Aortic Valve": 3.690855554282053,
+    "DAo": 12.46314415233589
+   }
+  },
+  {
+   "case": "Patient0014",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 15,
+   "rr_ms": 535.0,
+   "frame_ms": 35.666666666666664,
+   "gating_coverage": 0.9943042056074765,
+   "venc_mm_s": [
+    1200.0,
+    1200.0,
+    1200.0
+   ],
+   "voxel_mm": [
+    1.6249999999999998,
+    1.6249999999999998,
+    1.6000000238418568
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 3.653444528579712,
+   "process_s": 7.383943796157837,
+   "planes": {
+    "Ao": {
+     "net_mL": 5.898572699890348,
+     "peak_flow_mL_s": 33.86516988051908,
+     "net_mL_ols": 5.909000597551812,
+     "net_mL_msac": 5.918065764626218,
+     "net_mL_none": 5.972753751148294,
+     "library_net_mL": 5.4938606386151365,
+     "cvi42_net_mL": 6.27,
+     "lumen_radius_mm": 4.0370120953884205,
+     "grid_net_mL": 5.619511174849629,
+     "inplane_to_axial_peak": 0.6760691504117746,
+     "grid_outside_fov": 0.0
+    },
+    "Aortic Valve": {
+     "net_mL": 6.447541831821569,
+     "peak_flow_mL_s": 37.15933657691011,
+     "net_mL_ols": 6.457185041009106,
+     "net_mL_msac": 6.465832954775349,
+     "net_mL_none": 6.502222419709534,
+     "library_net_mL": 6.005991253480029,
+     "lumen_radius_mm": 4.755284953439538,
+     "grid_net_mL": 6.477946877033066,
+     "inplane_to_axial_peak": 0.3154745912735836,
+     "grid_outside_fov": 0.0
+    },
+    "DAo": {
+     "net_mL": 2.105811901649308,
+     "peak_flow_mL_s": 12.622128215151465,
+     "net_mL_ols": 2.105420916137001,
+     "net_mL_msac": 2.1034205018159677,
+     "net_mL_none": 2.143237994263073,
+     "library_net_mL": 2.0694721088214703,
+     "cvi42_net_mL": 2.95,
+     "lumen_radius_mm": 2.3883285641656053,
+     "grid_net_mL": 1.2887149116616186,
+     "inplane_to_axial_peak": 0.10532832379908967,
+     "grid_outside_fov": 0.0
+    },
+    "Aortic Valve_prox": {
+     "net_mL": 6.557438748907066,
+     "peak_flow_mL_s": 38.30068329294252,
+     "net_mL_ols": 6.564907301410549,
+     "net_mL_msac": 6.577250691668499,
+     "net_mL_none": 6.613775501399115,
+     "library_net_mL": 6.381121897052982
+    },
+    "Aortic Valve_dist": {
+     "net_mL": 6.673790846169546,
+     "peak_flow_mL_s": 38.97552259010708,
+     "net_mL_ols": 6.685172042398182,
+     "net_mL_msac": 6.692259484768429,
+     "net_mL_none": 6.735583166364185,
+     "library_net_mL": 6.320130259755722
+    },
+    "DAo_prox": {
+     "net_mL": 2.5329717995075027,
+     "peak_flow_mL_s": 15.122627805313588,
+     "net_mL_ols": 2.531950106790048,
+     "net_mL_msac": 2.529264042433582,
+     "net_mL_none": 2.5709888163183012,
+     "library_net_mL": 2.4647484540218203
+    },
+    "DAo_dist": {
+     "net_mL": 2.591453913003892,
+     "peak_flow_mL_s": 16.164952248594435,
+     "net_mL_ols": 2.5914226029243794,
+     "net_mL_msac": 2.5890926616110637,
+     "net_mL_none": 2.652890347604425,
+     "library_net_mL": 2.3090901126644283
+    }
+   },
+   "conservation_spread_pct": {
+    "Aortic Valve": 3.4491332223930273,
+    "DAo": 20.15045855768702
+   }
+  },
+  {
+   "case": "Patient0015",
+   "vendor": "siemens",
+   "scanner": "SIEMENS Avanto_fit",
+   "frames": 15,
+   "rr_ms": 442.0,
+   "frame_ms": 29.466666666666665,
+   "gating_coverage": 0.9959751131221721,
+   "venc_mm_s": [
+    2250.0,
+    2250.0,
+    2250.0
+   ],
+   "voxel_mm": [
+    1.625,
+    1.625,
+    1.6000000238418572
+   ],
+   "encoding_consistent": true,
+   "encoding_ratio": 1.0,
+   "load_s": 2.8011107444763184,
+   "process_s": 8.389403343200684,
+   "planes": {
+    "Aortic Valve": {
+     "net_mL": -24.666652780025654,
+     "peak_flow_mL_s": 161.18751161527322,
+     "net_mL_ols": -24.751801308284097,
+     "net_mL_msac": -24.455364349147455,
+     "net_mL_none": -25.902541866160014,
+     "library_net_mL": -24.342558759314677,
+     "cvi42_net_mL": -23.034,
+     "lumen_radius_mm": 8.97043709221672,
+     "grid_net_mL": -22.620891841254657,
+     "inplane_to_axial_peak": 0.7327124873685563,
+     "grid_outside_fov": 0.0
+    },
+    "DAo plane": {
+     "net_mL": 4.911174842549831,
+     "peak_flow_mL_s": 35.60111237738893,
+     "net_mL_ols": 4.923699425948089,
+     "net_mL_msac": 4.967812049032578,
+     "net_mL_none": 5.0753618135734335,
+     "library_net_mL": 4.677862870673972,
+     "cvi42_net_mL": 4.832,
+     "lumen_radius_mm": 5.026039526345196,
+     "grid_net_mL": 3.6743865111136333,
+     "inplane_to_axial_peak": 0.12890796947841035,
+     "grid_outside_fov": 0.0
+    },
+    "Aortic Valve_prox": {
+     "net_mL": -22.383045501256333,
+     "peak_flow_mL_s": 139.49185304346963,
+     "net_mL_ols": -22.441084424661835,
+     "net_mL_msac": -22.23171067115916,
+     "net_mL_none": -23.3436236521759,
+     "library_net_mL": -22.075072947888177
+    },
+    "Aortic Valve_dist": {
+     "net_mL": -24.546007905862556,
+     "peak_flow_mL_s": 156.40913915095027,
+     "net_mL_ols": -24.660599021850743,
+     "net_mL_msac": -24.273126172015477,
+     "net_mL_none": -25.958535337400207,
+     "library_net_mL": -23.874041893817402
+    },
+    "DAo plane_prox": {
+     "net_mL": 4.697752045030251,
+     "peak_flow_mL_s": 40.02697327404071,
+     "net_mL_ols": 4.7110531426004645,
+     "net_mL_msac": 4.768981327333425,
+     "net_mL_none": 4.864468909422836,
+     "library_net_mL": 4.205588590432396
+    },
+    "DAo plane_dist": {
+     "net_mL": 5.019184280684705,
+     "peak_flow_mL_s": 34.20904093079976,
+     "net_mL_ols": 5.0329779916265425,
+     "net_mL_msac": 5.07218579420409,
+     "net_mL_none": 5.199335935097068,
+     "library_net_mL": 4.804282224265886
+    }
+   },
+   "conservation_spread_pct": {
+    "Aortic Valve": 9.568760755568984,
+    "DAo plane": 6.592079427557073
+   }
+  }
+ ]
+}
