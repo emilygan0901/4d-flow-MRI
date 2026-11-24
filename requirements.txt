@@ -1,5 +1,7 @@
 # Versions used for the phantom validation (Nov 2026)
-slicerheart_4dflow==0.5.2
+slicerheart_4dflow[clinical]==0.5.2   # [clinical] adds pynrrd and slicerio, needed to read Slicer files
 numpy==2.5.3
 scipy==1.18.1
 pyyaml==6.0.3
+pynrrd==1.1.3
+slicerio==1.4.0
