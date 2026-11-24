@@ -31,7 +31,7 @@ RES, OUT = ROOT / "validation" / "results", ROOT / "figures"
 
 PINK, TEAL, GREEN, PUR = "#E8436B", "#3E9BA6", "#7DB343", "#7B3FA0"
 INK, Q, EDGE, GREY, BAND = "#1F2328", "#5A6270", "#BFC4C9", "#9AA1A9", "#EEF1F3"
-plt.rcParams.update({"font.family": "Inter", "font.size": 8.5, "axes.edgecolor": Q, "axes.labelcolor": INK,
+plt.rcParams.update({"font.family": ["Inter", "Arial", "DejaVu Sans"], "font.size": 8.5, "axes.edgecolor": Q, "axes.labelcolor": INK,
                      "xtick.color": Q, "ytick.color": Q, "axes.linewidth": 0.8, "axes.titlesize": 9.5,
                      "legend.frameon": False, "legend.fontsize": 7.5})
 

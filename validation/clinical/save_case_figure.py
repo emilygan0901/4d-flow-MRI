@@ -29,6 +29,7 @@ except ImportError:
     import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import logging; logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
 PINK, TEAL, INK, Q, EDGE = "#E8436B", "#3E9BA6", "#1F2328", "#5A6270", "#BFC4C9"
 cap = ScreenCapture.ScreenCaptureLogic()
 lm = slicer.app.layoutManager()
@@ -88,7 +89,7 @@ for name, pl in C["planes"].items():
 np.savetxt(os.path.join(OUTDIR, "flow_curves.csv"), np.column_stack(cols), delimiter=",",
            header=",".join(header), comments="", fmt="%.3f")
 
-plt.rcParams.update({"font.family": "Inter", "font.size": 8.5, "axes.edgecolor": Q, "xtick.color": Q, "ytick.color": Q})
+plt.rcParams.update({"font.family": ["Inter", "Arial", "DejaVu Sans"], "font.size": 8.5, "axes.edgecolor": Q, "xtick.color": Q, "ytick.color": Q})
 def flow_axes(ax):
     for i, (name, q, net, cq, cnet) in enumerate(curves):
         col = TEAL if i == 0 else PINK
