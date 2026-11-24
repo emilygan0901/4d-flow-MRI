@@ -41,8 +41,10 @@ slicer.app.processEvents()
 vn = slicer.util.getNodesByClass("vtkMRMLViewNode")[0]
 vn.SetBackgroundColor(1, 1, 1); vn.SetBackgroundColor2(1, 1, 1)
 vn.SetBoxVisible(False); vn.SetAxisLabelsVisible(False)
+for sn in slicer.util.getNodesByClass("vtkMRMLSliceNode"):
+    sn.SetSliceVisible(False)                           # hide slice planes so the camera frames the vessels
 view3d = lm.threeDWidget(0).threeDView()
-view3d.resetFocalPoint(); slicer.app.processEvents()
+view3d.resetFocalPoint(); view3d.resetCamera(); slicer.app.processEvents()
 p3d = os.path.join(OUTDIR, "pathlines_3d.png")
 cap.captureImageFromView(view3d, p3d)
 
@@ -99,7 +101,7 @@ def flow_axes(ax):
             ax.plot(*cq, color=col, lw=1.2, ls="--", label=f"{name}, cvi42 ({cnet * s:.1f} mL)")
     ax.axhline(0, color=EDGE, lw=0.7)
     ax.set_xlabel("Time in cardiac cycle (ms)"); ax.set_ylabel("Flow (mL/s)")
-    ax.legend(frameon=False, fontsize=7.5)
+    ax.legend(frameon=False, fontsize=7, loc="upper right")
     for sp in ("top", "right"):
         ax.spines[sp].set_visible(False)
 
@@ -107,12 +109,23 @@ fig, ax = plt.subplots(figsize=(3.6, 2.8)); flow_axes(ax); fig.tight_layout()
 fig.savefig(os.path.join(OUTDIR, "flow_curves.png"), dpi=300); plt.close(fig)
 
 # ---- combined figure ------------------------------------------------------------------------
-fig = plt.figure(figsize=(7.2, 3.0))
-gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1.25], wspace=0.25)
-for j, (path, title) in enumerate(((p3d, "Pathlines from the ascending aorta"), (pspd, "Speed at peak systole"))):
-    ax = fig.add_subplot(gs[0, j]); ax.imshow(plt.imread(path)); ax.axis("off")
+def crop(path, background, pad=12):
+    """Cut a screenshot down to its content (rows and columns that are not background)."""
+    img = plt.imread(path)[..., :3]
+    diff = np.abs(img - np.asarray(background, float)).max(-1) > 0.08
+    rows = np.where(diff.mean(1) > 0.02)[0]; cols = np.where(diff.mean(0) > 0.02)[0]
+    if len(rows) == 0 or len(cols) == 0:
+        return img
+    r0, r1 = max(rows[0] - pad, 0), min(rows[-1] + pad, img.shape[0])
+    c0, c1 = max(cols[0] - pad, 0), min(cols[-1] + pad, img.shape[1])
+    return img[r0:r1, c0:c1]
+
+fig = plt.figure(figsize=(7.2, 2.9))
+gs = fig.add_gridspec(1, 3, width_ratios=[0.9, 0.9, 1.35], wspace=0.38)
+for j, (path, bg, title) in enumerate(((p3d, (1, 1, 1), "Pathlines"), (pspd, (0, 0, 0), "Speed, peak systole"))):
+    ax = fig.add_subplot(gs[0, j]); ax.imshow(crop(path, bg)); ax.axis("off")
     ax.set_title(title, loc="left", fontsize=9, color=INK)
-    ax.text(-0.02, 1.08, "AB"[j], transform=ax.transAxes, fontsize=13, fontweight="bold", color=INK)
+    ax.text(-0.04, 1.1, "AB"[j], transform=ax.transAxes, fontsize=13, fontweight="bold", color=INK)
 ax = fig.add_subplot(gs[0, 2]); flow_axes(ax)
 ax.set_title("Aortic flow", loc="left", fontsize=9, color=INK)
 ax.text(-0.22, 1.08, "C", transform=ax.transAxes, fontsize=13, fontweight="bold", color=INK)
