@@ -1,0 +1,236 @@
+{
+ "settings": {
+  "cases": 300,
+  "planes_per_case": 20,
+  "latent": 8,
+  "seeds": 3
+ },
+ "reconstruction_mse": {
+  "ae": 0.0005670272179160128,
+  "pca": 0.0005376547245153537
+ },
+ "recovery_R2": {
+  "ae": {
+   "radius_mm": {
+    "linear": 0.535,
+    "nonlinear": 0.568
+   },
+   "dean": {
+    "linear": 0.507,
+    "nonlinear": 0.729
+   },
+   "arch_bulge_mm": {
+    "linear": 0.003,
+    "nonlinear": -0.175
+   },
+   "mean_velocity_peak_m_s": {
+    "linear": 0.956,
+    "nonlinear": 0.924,
+    "beyond_geometry_nonlinear": 0.871
+   },
+   "peak_flow_ml_s": {
+    "linear": 0.325,
+    "nonlinear": 0.223,
+    "beyond_geometry_nonlinear": 0.748
+   },
+   "helicity": {
+    "linear": 0.799,
+    "nonlinear": 0.871,
+    "beyond_geometry_nonlinear": 0.848
+   },
+   "eccentricity": {
+    "linear": 0.475,
+    "nonlinear": 0.508,
+    "beyond_geometry_nonlinear": 0.471
+   },
+   "reversal": {
+    "linear": 0.016,
+    "nonlinear": -0.184,
+    "beyond_geometry_nonlinear": -0.249
+   },
+   "voxel_mm": {
+    "linear": -0.038,
+    "nonlinear": -0.29
+   },
+   "frames": {
+    "linear": -0.025,
+    "nonlinear": -0.262
+   },
+   "venc_m_s": {
+    "linear": -0.035,
+    "nonlinear": -0.235
+   },
+   "snr": {
+    "linear": -0.031,
+    "nonlinear": -0.182
+   },
+   "background_m_s": {
+    "linear": -0.028,
+    "nonlinear": -0.172
+   },
+   "reversal_phase (reversal>0.25)": {
+    "nonlinear": -0.29
+   },
+   "reversal_width_deg (reversal>0.25)": {
+    "nonlinear": -0.105
+   }
+  },
+  "pca": {
+   "radius_mm": {
+    "linear": 0.562,
+    "nonlinear": 0.524
+   },
+   "dean": {
+    "linear": 0.612,
+    "nonlinear": 0.843
+   },
+   "arch_bulge_mm": {
+    "linear": 0.009,
+    "nonlinear": -0.172
+   },
+   "mean_velocity_peak_m_s": {
+    "linear": 0.991,
+    "nonlinear": 0.851,
+    "beyond_geometry_nonlinear": 0.847
+   },
+   "peak_flow_ml_s": {
+    "linear": 0.345,
+    "nonlinear": 0.144,
+    "beyond_geometry_nonlinear": 0.766
+   },
+   "helicity": {
+    "linear": 0.879,
+    "nonlinear": 0.889,
+    "beyond_geometry_nonlinear": 0.863
+   },
+   "eccentricity": {
+    "linear": 0.587,
+    "nonlinear": 0.662,
+    "beyond_geometry_nonlinear": 0.626
+   },
+   "reversal": {
+    "linear": 0.256,
+    "nonlinear": 0.211,
+    "beyond_geometry_nonlinear": 0.127
+   },
+   "voxel_mm": {
+    "linear": -0.033,
+    "nonlinear": -0.226
+   },
+   "frames": {
+    "linear": -0.038,
+    "nonlinear": -0.205
+   },
+   "venc_m_s": {
+    "linear": -0.029,
+    "nonlinear": -0.265
+   },
+   "snr": {
+    "linear": -0.011,
+    "nonlinear": -0.172
+   },
+   "background_m_s": {
+    "linear": -0.034,
+    "nonlinear": -0.128
+   },
+   "reversal_phase (reversal>0.25)": {
+    "nonlinear": 0.441
+   },
+   "reversal_width_deg (reversal>0.25)": {
+    "nonlinear": 0.178
+   }
+  }
+ },
+ "acquisition_share_of_variance": {
+  "ae": {
+   "mean": 0.05477231368422508,
+   "per_feature": [
+    0.04399999976158142,
+    0.15600000321865082,
+    0.07500000298023224,
+    0.008999999612569809,
+    0.004000000189989805,
+    0.04500000178813934,
+    0.0010000000474974513,
+    0.10400000214576721
+   ]
+  },
+  "pca": {
+   "mean": 0.07613246142864227,
+   "per_feature": [
+    0.0010000000474974513,
+    0.006000000052154064,
+    0.010999999940395355,
+    0.004000000189989805,
+    0.0430000014603138,
+    0.11500000208616257,
+    0.006000000052154064,
+    0.4230000078678131
+   ]
+  }
+ },
+ "reproducibility": {
+  "ae": {
+   "median_r": 0.9286767563141562,
+   "min_r": 0.8755913772836692,
+   "share_r_ge_0_8": 1.0,
+   "helicity_R2_per_seed": [
+    0.871,
+    0.922,
+    0.852
+   ]
+  },
+  "pca": {
+   "median_r": 0.9999999999986975,
+   "min_r": 0.9999999999927264,
+   "share_r_ge_0_8": 1.0,
+   "helicity_R2_per_seed": [
+    0.889,
+    0.889,
+    0.889
+   ]
+  }
+ },
+ "planted_cohort": {
+  "ae": {
+   "dilation only (null)": {
+    "detection_rate_adjusted": 0.057,
+    "detection_rate_unadjusted": 0.04,
+    "helicity_d": 0.13,
+    "dilation_d": 3.72
+   },
+   "moderate helicity difference": {
+    "detection_rate_adjusted": 0.312,
+    "detection_rate_unadjusted": 0.246,
+    "helicity_d": 0.85,
+    "dilation_d": 3.91
+   },
+   "large helicity difference": {
+    "detection_rate_adjusted": 0.65,
+    "detection_rate_unadjusted": 0.522,
+    "helicity_d": 1.52,
+    "dilation_d": 3.87
+   }
+  },
+  "pca": {
+   "dilation only (null)": {
+    "detection_rate_adjusted": 0.045,
+    "detection_rate_unadjusted": 0.033,
+    "helicity_d": 0.13,
+    "dilation_d": 3.72
+   },
+   "moderate helicity difference": {
+    "detection_rate_adjusted": 0.288,
+    "detection_rate_unadjusted": 0.272,
+    "helicity_d": 0.85,
+    "dilation_d": 3.91
+   },
+   "large helicity difference": {
+    "detection_rate_adjusted": 0.714,
+    "detection_rate_unadjusted": 0.667,
+    "helicity_d": 1.52,
+    "dilation_d": 3.87
+   }
+  }
+ }
+}

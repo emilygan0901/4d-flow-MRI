@@ -174,5 +174,5 @@ for model in ("ae", "pca"):
         cres[model][label] = dict(detection_rate_adjusted=det_adj / 1000, detection_rate_unadjusted=det_raw / 1000,
                                   helicity_d=round(float(np.mean(dh)), 2), dilation_d=round(float(np.mean(dd)), 2))
 res["planted_cohort"] = cres
-json.dump(res, open(RES / "evaluation.json", "w"), indent=1)
-print(json.dumps(res, indent=1))
+json.dump(res, open(RES / "evaluation.json", "w"), indent=1, default=float)
+print(json.dumps(res, indent=1, default=float))
