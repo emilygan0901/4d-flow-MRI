@@ -18,9 +18,6 @@ for i = 1:n
     text(ax, v(i) * 1.12, y(i), sprintf('%.2f', v(i)), 'FontName', C.font, 'FontSize', 8, ...
         'Color', C.ink, 'VerticalAlignment', 'middle');
 end
-% WRLS is marginally lower, so state why WAR+MSAC is the locked choice
-text(ax, 0.62, y(n), 'selected, also rejects wrap-around', 'FontName', C.font, 'FontSize', 7.5, ...
-    'FontAngle', 'italic', 'Color', C.dark, 'VerticalAlignment', 'middle');
 set(ax, 'XScale', 'log', 'XLim', [0.1 40], 'YLim', [0.4 n + 0.6], 'YTick', 1:n, 'YTickLabel', fliplr(names), ...
     'XTick', [0.1 1 10], 'XTickLabel', {'0.1', '1', '10'});
 xlabel(ax, 'Residual velocity in static tissue (mm/s, log scale)', 'Color', C.ink);
@@ -44,7 +41,7 @@ Wd = read_csv('phantom_wss.csv');
 ax = axes('Position', [X(1) Y(2) W H]); hold(ax, 'on');
 % clinical 4D Flow voxels are about 2-3 mm: very light band, labelled directly
 patch(ax, [2.0 3.0 3.0 2.0], [-100 -100 15 15], [0.965 0.972 0.978], 'EdgeColor', 'none');
-plot(ax, [0.3 3.0], [0 0], '-', 'Color', C.axis, 'LineWidth', 0.9);
+plot(ax, [0.3 3.0], [0 0], ':', 'Color', C.edge, 'LineWidth', 0.7);
 text(ax, 2.5, -97, {'Clinical', 'voxels'}, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', ...
     'FontName', C.font, 'FontSize', 7, 'Color', C.axis);
 g1 = plot(ax, Wd(:, 1), Wd(:, 2), '-o', 'Color', C.teal, 'LineWidth', 1.4, 'MarkerSize', 4, 'MarkerFaceColor', C.teal);
@@ -64,9 +61,7 @@ panel_label(ax, 'C', 'Wall shear stress', -0.3);
 % error bars for each method, both methods offset slightly about the true value.
 P = read_csv('phantom_pwv.csv');
 tv = unique(P(:, 1))'; ax = axes('Position', [X(2) Y(2) W H]); hold(ax, 'on');
-plot(ax, [0 15], [0 15], '--', 'Color', C.edge, 'LineWidth', 1);
-text(ax, 10.6, 9.6, 'Line of identity', 'Rotation', 28.6, 'HorizontalAlignment', 'center', ...
-    'VerticalAlignment', 'top', 'FontName', C.font, 'FontSize', 7, 'Color', C.axis);
+hid = plot(ax, [0 15], [0 15], '--', 'Color', C.edge, 'LineWidth', 1);
 cols = {C.grey, C.teal}; mk = {'s', 'o'}; off = [-0.22 0.22]; hm = zeros(1, 2);
 for m = 1:2
     med = zeros(size(tv)); lo = med; hi = med;
@@ -84,7 +79,8 @@ for m = 1:2
 end
 xlim(ax, [2 14]); ylim(ax, [2 18]); set(ax, 'XTick', tv, 'YTick', 4:4:16);
 xlabel(ax, 'True PWV (m/s)', 'Color', C.ink); ylabel(ax, 'Estimated PWV (m/s)', 'Color', C.ink);
-lg = legend(ax, hm, {'Two planes', '20-plane regression'}, 'Box', 'off', 'Color', 'none', 'FontSize', 7.5, 'Location', 'northwest');
+lg = legend(ax, [hm hid], {'Two planes', '20-plane regression', 'Line of identity'}, 'Box', 'off', 'Color', 'none', 'FontSize', 7.5);
+set(lg, 'Position', [X(2) + 0.19, Y(2) + 0.008, 0.13, 0.1]);
 style_axes(ax);
 panel_label(ax, 'D', 'Pulse wave velocity', -0.22);
 
