@@ -2,7 +2,7 @@
 % (A) variance in each known factor explained by the 8 learned features
 % (cross-validated R2, non-linear probe), (B) detection rate in planted
 % 21 vs 12 cohorts against the planted helicity difference.
-% Data: data/synthetic_recovery.csv, data/synthetic_power.csv
+% Data: tables/synthetic_recovery.csv, tables/synthetic_power.csv
 % Run in MATLAB (or Octave) from this folder:  Figure_synthetic_recovery
 C = fig_colors();
 R = read_csv('synthetic_recovery.csv'); R(R < 0) = 0;

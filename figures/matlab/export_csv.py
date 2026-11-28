@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-OUT = ROOT / "figures" / "matlab" / "data"
+OUT = ROOT / "figures" / "matlab" / "tables"
 OUT.mkdir(exist_ok=True)
 R = ROOT / "validation" / "results"
 

@@ -1,6 +1,6 @@
 % Figure 8. Bland-Altman agreement of aortic net flow with Circle cvi42.
 % (A) locked pipeline (WAR+MSAC background correction), (B) without background
-% correction. Points shaded by lumen radius. Data: data/clinical_agreement.csv
+% correction. Points shaded by lumen radius. Data: tables/clinical_agreement.csv
 % Run in MATLAB (or Octave) from this folder:  Figure_clinical_agreement
 C = fig_colors();
 M = read_csv('clinical_agreement.csv');

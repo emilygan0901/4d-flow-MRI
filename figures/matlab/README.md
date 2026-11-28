@@ -2,7 +2,7 @@
 
 Publication versions of Figures 7–9 of the planning report, in the same colours as the other figures.
 
-1. `python figures/matlab/export_csv.py` (from the repository root) writes the result tables in `data/`.
+1. `python figures/matlab/export_csv.py` (from the repository root) writes the result tables in `tables/`.
    They hold only phantom, synthetic and public CC BY 4.0 results, no study data.
 2. In MATLAB, `cd figures/matlab` and run
    - `Figure_phantom_validation` (Figure 7)

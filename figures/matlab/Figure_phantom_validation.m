@@ -1,7 +1,7 @@
 % Figure 7. Validation of the processing steps on digital phantoms with analytic
 % ground truth. (A) background phase correction, (B) phase unwrapping,
 % (C) WSS error against voxel size, (D) PWV from two planes and 20-plane regression.
-% Data: data/phantom_*.csv (exported by export_csv.py from validation/results).
+% Data: tables/phantom_*.csv (exported by export_csv.py from validation/results).
 % Run in MATLAB (or Octave) from this folder:  Figure_phantom_validation
 C = fig_colors();
 f = figure('Color', 'w', 'Units', 'points', 'Position', [50 50 520 440]);

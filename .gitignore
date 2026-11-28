@@ -39,4 +39,4 @@ Thumbs.db
 synthetic/data/
 
 # Non-patient result tables used by the MATLAB figure scripts
-!figures/matlab/data/*.csv
+!figures/matlab/tables/*.csv
