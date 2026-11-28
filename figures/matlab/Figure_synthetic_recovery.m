@@ -9,40 +9,30 @@ R = read_csv('synthetic_recovery.csv'); R(R < 0) = 0;
 labs = {'Mean velocity', 'Helicity', 'Jet eccentricity', 'Flow reversal', 'Dean (curvature)', ...
     'Lumen radius', 'Voxel size', 'Frames', 'VENC', 'SNR', 'Background offset'};
 n = numel(labs);
-% leave gaps between the three groups of factors
-y = [17 16 15 14, 12 11, 9 8 7 6 5];
+% Dot plot on evenly spaced rows, with a heading row for each group of factors
+y = [13 12 11 10, 8 7, 5 4 3 2 1];   % factor rows
+hy = [14 9 6]; gl = {'Haemodynamics', 'Geometry', 'Acquisition'};
 f = figure('Color', 'w', 'Units', 'points', 'Position', [50 50 520 270]);
 
 % A  What the features capture --------------------------------------------
 ax = axes('Position', [0.19 0.23 0.4 0.64]); hold(ax, 'on');
-for i = 1:n
-    patch(ax, [0 R(i, 1) R(i, 1) 0], y(i) + 0.04 + [0 0 0.36 0.36], C.teal, 'EdgeColor', 'none');
-    patch(ax, [0 R(i, 2) R(i, 2) 0], y(i) - 0.04 - [0 0 0.36 0.36], C.grey, 'EdgeColor', 'none');
-    if i >= 7
-        % measured values close to zero: small end markers so they read as results, not gaps
-        plot(ax, R(i, 1), y(i) + 0.22, 'o', 'MarkerSize', 3.5, 'MarkerFaceColor', C.teal, 'MarkerEdgeColor', C.teal);
-        plot(ax, R(i, 2), y(i) - 0.22, 's', 'MarkerSize', 3.5, 'MarkerFaceColor', C.grey, 'MarkerEdgeColor', C.grey);
-    end
-    if i <= 4
-        plot(ax, R(i, 3), y(i) + 0.22, 'd', 'MarkerSize', 5.5, 'MarkerFaceColor', C.ink, 'MarkerEdgeColor', 'w', 'LineWidth', 0.6);
-    end
+for i = 1:n   % faint guide line per row, then a thin link between the two methods
+    plot(ax, [-0.04 1], [y(i) y(i)], '-', 'Color', [0.93 0.94 0.95], 'LineWidth', 0.6);
+    plot(ax, [R(i, 1) R(i, 2)], [y(i) y(i)], '-', 'Color', C.edge, 'LineWidth', 1.6);
 end
-plot(ax, [0 1], [13.5 13.5], '-', 'Color', C.edge, 'LineWidth', 0.6);
-plot(ax, [0 1], [10.5 10.5], '-', 'Color', C.edge, 'LineWidth', 0.6);
-% group labels sit directly under each boundary, right-aligned
-gy = [18.05 13.2 10.2]; gl = {'Haemodynamics', 'Geometry', 'Acquisition'};
+% where both methods sit at the same value, separate them slightly so both stay visible
+same = abs(R(:, 1) - R(:, 2)) < 0.03; dy = 0.2 * same';
+hP = plot(ax, R(:, 2), y - dy, 's', 'MarkerSize', 6.5, 'MarkerFaceColor', C.grey, 'MarkerEdgeColor', 'w', 'LineWidth', 0.6);
+hA = plot(ax, R(:, 1), y + dy, 'o', 'MarkerSize', 6.5, 'MarkerFaceColor', C.teal, 'MarkerEdgeColor', 'w', 'LineWidth', 0.6);
+hG = plot(ax, R(1:4, 3), y(1:4), 'd', 'MarkerSize', 7, 'MarkerFaceColor', 'none', 'MarkerEdgeColor', C.ink, 'LineWidth', 1.1);
 for g = 1:3
-    text(ax, 1, gy(g), gl{g}, 'HorizontalAlignment', 'right', 'VerticalAlignment', 'top', 'FontName', C.font, ...
-        'FontSize', 7.5, 'FontAngle', 'italic', 'Color', C.axis);
+    text(ax, -0.06, hy(g), gl{g}, 'HorizontalAlignment', 'right', 'VerticalAlignment', 'middle', ...
+        'FontName', C.font, 'FontSize', 8, 'FontWeight', 'bold', 'Color', C.ink);
 end
-text(ax, 0.06, 7, {'All \approx 0, so acquisition', 'is not encoded'}, 'VerticalAlignment', 'middle', ...
-    'FontName', C.font, 'FontSize', 7.5, 'Color', C.ink);
-set(ax, 'YTick', fliplr(y), 'YTickLabel', fliplr(labs), 'YLim', [4.4 18.3], 'XLim', [0 1], 'XTick', 0:0.2:1);
+set(ax, 'YTick', fliplr(y), 'YTickLabel', fliplr(labs), 'YLim', [0.4 14.6], 'XLim', [-0.04 1], 'XTick', 0:0.2:1);
 xlabel(ax, 'Cross-validated R^2', 'Color', C.ink);
 style_axes(ax); set(ax, 'TickLength', [0 0]);
 panel_label(ax, 'A', 'What the features capture', -0.42);
-hA = patch(ax, NaN, NaN, C.teal, 'EdgeColor', 'none'); hP = patch(ax, NaN, NaN, C.grey, 'EdgeColor', 'none');
-hG = plot(ax, NaN, NaN, 'd', 'MarkerSize', 5.5, 'MarkerFaceColor', C.ink, 'MarkerEdgeColor', 'w');
 lg = legend(ax, [hA hP hG], {'Autoencoder', 'PCA', 'Autoencoder, local geometry removed'}, 'Box', 'off', ...
     'Color', 'none', 'FontSize', 7.5, 'Orientation', 'horizontal');
 set(lg, 'Position', [0.06 0.01 0.6 0.06]);
