@@ -59,36 +59,32 @@ legend(ax, [g1 g2 g3], {'Steady flow', 'Pulsatile, time-averaged', 'Pulsatile, p
 style_axes(ax);
 panel_label(ax, 'C', 'Wall shear stress', -0.3);
 
-% D  Pulse wave velocity: error relative to the true value -------------------
-% Each method: thick bar = interquartile range, thin line = 5th-95th percentile,
-% white dot = median. Relative error puts all stiffness levels on one scale.
+% D  Pulse wave velocity: estimated against true, line of identity -----------
+% Conventional validation layout: median estimate with interquartile-range
+% error bars for each method, both methods offset slightly about the true value.
 P = read_csv('phantom_pwv.csv');
 tv = unique(P(:, 1))'; ax = axes('Position', [X(2) Y(2) W H]); hold(ax, 'on');
-cols = {C.grey, C.teal}; off = [-0.17 0.17]; top = 130; hm = zeros(1, 2);
-plot(ax, [0.25 numel(tv) + 0.6], [0 0], '-', 'Color', C.axis, 'LineWidth', 0.9);
-for k = 1:numel(tv)
-    for m = 1:2
-        e = P(P(:, 1) == tv(k) & P(:, 2) == m, 3);
-        r = 100 * (e - tv(k)) / tv(k);
-        q = pctl(r, [5 25 50 75 95]); x0 = k + off(m);
-        plot(ax, [x0 x0], [q(1) min(q(5), top)], '-', 'Color', cols{m}, 'LineWidth', 1.2);
-        if q(5) > top   % whisker beyond the axis: arrow tip and its value
-            plot(ax, x0, top - 2, '^', 'MarkerSize', 4, 'MarkerFaceColor', cols{m}, 'MarkerEdgeColor', cols{m});
-            text(ax, x0 - 0.06, top - 4, sprintf('%.0f%%', q(5)), 'HorizontalAlignment', 'right', ...
-                'VerticalAlignment', 'top', 'FontName', C.font, 'FontSize', 6.5, 'Color', C.axis);
-        end
-        hm(m) = plot(ax, [x0 x0], q([2 4]), '-', 'Color', cols{m}, 'LineWidth', 6);
-        plot(ax, x0, q(3), 'o', 'MarkerSize', 3.2, 'MarkerFaceColor', 'w', 'MarkerEdgeColor', 'w');
-        text(ax, x0, -54, sprintf('%.0f', q(4) - q(2)), 'HorizontalAlignment', 'center', ...
-            'VerticalAlignment', 'middle', 'FontName', C.font, 'FontSize', 6.5, 'Color', C.ink);
+plot(ax, [0 15], [0 15], '--', 'Color', C.edge, 'LineWidth', 1);
+text(ax, 10.6, 9.6, 'Line of identity', 'Rotation', 28.6, 'HorizontalAlignment', 'center', ...
+    'VerticalAlignment', 'top', 'FontName', C.font, 'FontSize', 7, 'Color', C.axis);
+cols = {C.grey, C.teal}; mk = {'s', 'o'}; off = [-0.22 0.22]; hm = zeros(1, 2);
+for m = 1:2
+    med = zeros(size(tv)); lo = med; hi = med;
+    for k = 1:numel(tv)
+        q = pctl(P(P(:, 1) == tv(k) & P(:, 2) == m, 3), [25 50 75]);
+        lo(k) = q(1); med(k) = q(2); hi(k) = q(3);
     end
+    x = tv + off(m);
+    for k = 1:numel(tv)
+        plot(ax, [x(k) x(k)], [lo(k) hi(k)], '-', 'Color', cols{m}, 'LineWidth', 1.4);
+        plot(ax, x(k) + [-0.12 0.12], [lo(k) lo(k)], '-', 'Color', cols{m}, 'LineWidth', 1.4);
+        plot(ax, x(k) + [-0.12 0.12], [hi(k) hi(k)], '-', 'Color', cols{m}, 'LineWidth', 1.4);
+    end
+    hm(m) = plot(ax, x, med, mk{m}, 'MarkerSize', 6, 'MarkerFaceColor', cols{m}, 'MarkerEdgeColor', 'w', 'LineWidth', 0.6);
 end
-text(ax, 0.28, -54, 'IQR', 'VerticalAlignment', 'middle', 'FontName', C.font, 'FontSize', 6.5, 'Color', C.axis);
-set(ax, 'XTick', 1:numel(tv), 'XTickLabel', arrayfun(@num2str, tv, 'UniformOutput', false));
-xlim(ax, [0.25 numel(tv) + 0.6]); ylim(ax, [-62 top]); set(ax, 'YTick', -50:50:100);
-xlabel(ax, 'True PWV (m/s)', 'Color', C.ink); ylabel(ax, 'Error in estimated PWV (%)', 'Color', C.ink);
-lg = legend(ax, hm, {'Two planes', '20-plane regression'}, 'Box', 'off', 'Color', 'none', 'FontSize', 7.5);
-set(lg, 'Position', [X(2) + 0.02, Y(2) + H - 0.07, 0.15, 0.06]);
+xlim(ax, [2 14]); ylim(ax, [2 18]); set(ax, 'XTick', tv, 'YTick', 4:4:16);
+xlabel(ax, 'True PWV (m/s)', 'Color', C.ink); ylabel(ax, 'Estimated PWV (m/s)', 'Color', C.ink);
+lg = legend(ax, hm, {'Two planes', '20-plane regression'}, 'Box', 'off', 'Color', 'none', 'FontSize', 7.5, 'Location', 'northwest');
 style_axes(ax);
 panel_label(ax, 'D', 'Pulse wave velocity', -0.22);
 
