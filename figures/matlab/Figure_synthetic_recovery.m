@@ -9,30 +9,40 @@ R = read_csv('synthetic_recovery.csv'); R(R < 0) = 0;
 labs = {'Mean velocity', 'Helicity', 'Jet eccentricity', 'Flow reversal', 'Dean (curvature)', ...
     'Lumen radius', 'Voxel size', 'Frames', 'VENC', 'SNR', 'Background offset'};
 n = numel(labs);
-% Dot plot on evenly spaced rows, with a heading row for each group of factors
-y = [13 12 11 10, 8 7, 5 4 3 2 1];   % factor rows
-hy = [14 9 6]; gl = {'Haemodynamics', 'Geometry', 'Acquisition'};
+% Horizontal bars on evenly spaced rows (one row per factor, no extra gaps);
+% groups are marked by thin separators and rotated labels at the left.
+y = n:-1:1;
 f = figure('Color', 'w', 'Units', 'points', 'Position', [50 50 520 270]);
 
 % A  What the features capture --------------------------------------------
-ax = axes('Position', [0.19 0.23 0.4 0.64]); hold(ax, 'on');
-for i = 1:n   % faint guide line per row, then a thin link between the two methods
-    plot(ax, [-0.04 1], [y(i) y(i)], '-', 'Color', [0.93 0.94 0.95], 'LineWidth', 0.6);
-    plot(ax, [R(i, 1) R(i, 2)], [y(i) y(i)], '-', 'Color', C.edge, 'LineWidth', 1.6);
+ax = axes('Position', [0.215 0.23 0.375 0.64]); hold(ax, 'on');
+bh = 0.36;   % height of each bar; the pair fills most of the row
+for i = 1:n
+    patch(ax, [0 R(i, 1) R(i, 1) 0], y(i) + [0 0 bh bh], C.teal, 'EdgeColor', 'none');
+    patch(ax, [0 R(i, 2) R(i, 2) 0], y(i) - [0 0 bh bh], C.grey, 'EdgeColor', 'none');
+    if R(i, 1) < 0.02   % value near zero: small tick so it reads as a result
+        plot(ax, [0 0.012], y(i) + bh / 2 * [1 1], '-', 'Color', C.teal, 'LineWidth', 2.5);
+    end
+    if R(i, 2) < 0.02
+        plot(ax, [0 0.012], y(i) - bh / 2 * [1 1], '-', 'Color', C.grey, 'LineWidth', 2.5);
+    end
 end
-% where both methods sit at the same value, separate them slightly so both stay visible
-same = abs(R(:, 1) - R(:, 2)) < 0.03; dy = 0.2 * same';
-hP = plot(ax, R(:, 2), y - dy, 's', 'MarkerSize', 6.5, 'MarkerFaceColor', C.grey, 'MarkerEdgeColor', 'w', 'LineWidth', 0.6);
-hA = plot(ax, R(:, 1), y + dy, 'o', 'MarkerSize', 6.5, 'MarkerFaceColor', C.teal, 'MarkerEdgeColor', 'w', 'LineWidth', 0.6);
-hG = plot(ax, R(1:4, 3), y(1:4), 'd', 'MarkerSize', 7, 'MarkerFaceColor', 'none', 'MarkerEdgeColor', C.ink, 'LineWidth', 1.1);
+hG = plot(ax, R(1:4, 3), y(1:4)' + bh / 2, 'd', 'MarkerSize', 6, 'MarkerFaceColor', C.ink, 'MarkerEdgeColor', 'w', 'LineWidth', 0.6);
+sep = [mean(y(4:5)) mean(y(6:7))];
+for k = 1:2
+    plot(ax, [-0.5 1], [sep(k) sep(k)], '-', 'Color', C.edge, 'LineWidth', 0.6, 'Clipping', 'off');
+end
+grp = {1:4, 5:6, 7:11}; gl = {'Haemodynamics', 'Geometry', 'Acquisition'};
 for g = 1:3
-    text(ax, -0.06, hy(g), gl{g}, 'HorizontalAlignment', 'right', 'VerticalAlignment', 'middle', ...
-        'FontName', C.font, 'FontSize', 8, 'FontWeight', 'bold', 'Color', C.ink);
+    yy = mean(y(grp{g}));
+    text(ax, -0.5, yy, gl{g}, 'Rotation', 90, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', ...
+        'FontName', C.font, 'FontSize', 6.8, 'FontAngle', 'italic', 'Color', C.axis);
 end
-set(ax, 'YTick', fliplr(y), 'YTickLabel', fliplr(labs), 'YLim', [0.4 14.6], 'XLim', [-0.04 1], 'XTick', 0:0.2:1);
+set(ax, 'YTick', fliplr(y), 'YTickLabel', fliplr(labs), 'YLim', [0.45 n + 0.55], 'XLim', [0 1], 'XTick', 0:0.2:1);
 xlabel(ax, 'Cross-validated R^2', 'Color', C.ink);
 style_axes(ax); set(ax, 'TickLength', [0 0]);
-panel_label(ax, 'A', 'What the features capture', -0.42);
+panel_label(ax, 'A', 'What the features capture', -0.52);
+hA = patch(ax, NaN, NaN, C.teal, 'EdgeColor', 'none'); hP = patch(ax, NaN, NaN, C.grey, 'EdgeColor', 'none');
 lg = legend(ax, [hA hP hG], {'Autoencoder', 'PCA', 'Autoencoder, local geometry removed'}, 'Box', 'off', ...
     'Color', 'none', 'FontSize', 7.5, 'Orientation', 'horizontal');
 set(lg, 'Position', [0.06 0.01 0.6 0.06]);
