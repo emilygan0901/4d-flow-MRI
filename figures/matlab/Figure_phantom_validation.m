@@ -15,8 +15,7 @@ ax = axes('Position', [X(1) Y(1) W H]); hold(ax, 'on');
 for i = 1:n
     c = C.grey; if i == 1, c = C.pink; elseif i == n, c = C.teal; end
     patch(ax, [0.1 v(i) v(i) 0.1], y(i) + [-0.32 -0.32 0.32 0.32], c, 'EdgeColor', 'none');
-    plot(ax, [v(i) - s(i), v(i) + s(i)], [y(i) y(i)], '-', 'Color', C.axis, 'LineWidth', 0.8);
-    text(ax, (v(i) + s(i)) * 1.12, y(i), sprintf('%.2f', v(i)), 'FontName', C.font, 'FontSize', 8, ...
+    text(ax, v(i) * 1.12, y(i), sprintf('%.2f', v(i)), 'FontName', C.font, 'FontSize', 8, ...
         'Color', C.ink, 'VerticalAlignment', 'middle');
 end
 % WRLS is marginally lower, so state why WAR+MSAC is the locked choice
@@ -45,11 +44,9 @@ Wd = read_csv('phantom_wss.csv');
 ax = axes('Position', [X(1) Y(2) W H]); hold(ax, 'on');
 % clinical 4D Flow voxels are about 2-3 mm: very light band, labelled directly
 patch(ax, [2.0 3.0 3.0 2.0], [-100 -100 15 15], [0.965 0.972 0.978], 'EdgeColor', 'none');
-text(ax, 2.5, 13, {'Clinical voxels', '(2–3 mm)'}, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', ...
-    'FontName', C.font, 'FontSize', 7, 'Color', C.axis);
 plot(ax, [0.3 3.0], [0 0], '-', 'Color', C.axis, 'LineWidth', 0.9);
-text(ax, 2.96, -98, 'Negative = underestimation', 'HorizontalAlignment', 'right', 'VerticalAlignment', 'bottom', 'FontName', C.font, ...
-    'FontSize', 7, 'Color', C.axis);
+text(ax, 2.5, -97, {'Clinical', 'voxels'}, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom', ...
+    'FontName', C.font, 'FontSize', 7, 'Color', C.axis);
 g1 = plot(ax, Wd(:, 1), Wd(:, 2), '-o', 'Color', C.teal, 'LineWidth', 1.4, 'MarkerSize', 4, 'MarkerFaceColor', C.teal);
 g2 = plot(ax, Wd(:, 1), Wd(:, 3), '-o', 'Color', C.pink, 'LineWidth', 1.4, 'MarkerSize', 4, 'MarkerFaceColor', C.pink);
 g3 = plot(ax, Wd(:, 1), Wd(:, 4), '--v', 'Color', C.pink, 'LineWidth', 1.4, 'MarkerSize', 4, 'MarkerFaceColor', C.pink);
@@ -62,30 +59,36 @@ legend(ax, [g1 g2 g3], {'Steady flow', 'Pulsatile, time-averaged', 'Pulsatile, p
 style_axes(ax);
 panel_label(ax, 'C', 'Wall shear stress', -0.3);
 
-% D  Pulse wave velocity ----------------------------------------------------
+% D  Pulse wave velocity: error relative to the true value -------------------
+% Each method: thick bar = interquartile range, thin line = 5th-95th percentile,
+% white dot = median. Relative error puts all stiffness levels on one scale.
 P = read_csv('phantom_pwv.csv');
 tv = unique(P(:, 1))'; ax = axes('Position', [X(2) Y(2) W H]); hold(ax, 'on');
-cols = {C.grey, C.teal}; off = [-0.22 0.22]; bw = 0.36; hb = zeros(1, 2);
+cols = {C.grey, C.teal}; off = [-0.17 0.17]; top = 130; hm = zeros(1, 2);
+plot(ax, [0.25 numel(tv) + 0.6], [0 0], '-', 'Color', C.axis, 'LineWidth', 0.9);
 for k = 1:numel(tv)
     for m = 1:2
         e = P(P(:, 1) == tv(k) & P(:, 2) == m, 3);
-        q = pctl(e, [5 25 50 75 95]); x0 = k + off(m);
-        plot(ax, [x0 x0], q([1 2]), '-', 'Color', cols{m}, 'LineWidth', 1.3);
-        plot(ax, [x0 x0], q([4 5]), '-', 'Color', cols{m}, 'LineWidth', 1.3);
-        plot(ax, x0 + [-0.08 0.08], q([1 1]), '-', 'Color', cols{m}, 'LineWidth', 1.3);
-        plot(ax, x0 + [-0.08 0.08], q([5 5]), '-', 'Color', cols{m}, 'LineWidth', 1.3);
-        hb(m) = patch(ax, x0 + bw / 2 * [-1 1 1 -1], q([2 2 4 4]), cols{m}, 'EdgeColor', cols{m}, 'LineWidth', 1.2, 'FaceAlpha', 0.85);
-        plot(ax, x0 + bw / 2 * [-1 1], q([3 3]), '-', 'Color', C.ink, 'LineWidth', 2);
+        r = 100 * (e - tv(k)) / tv(k);
+        q = pctl(r, [5 25 50 75 95]); x0 = k + off(m);
+        plot(ax, [x0 x0], [q(1) min(q(5), top)], '-', 'Color', cols{m}, 'LineWidth', 1.2);
+        if q(5) > top   % whisker beyond the axis: arrow tip and its value
+            plot(ax, x0, top - 2, '^', 'MarkerSize', 4, 'MarkerFaceColor', cols{m}, 'MarkerEdgeColor', cols{m});
+            text(ax, x0 - 0.06, top - 4, sprintf('%.0f%%', q(5)), 'HorizontalAlignment', 'right', ...
+                'VerticalAlignment', 'top', 'FontName', C.font, 'FontSize', 6.5, 'Color', C.axis);
+        end
+        hm(m) = plot(ax, [x0 x0], q([2 4]), '-', 'Color', cols{m}, 'LineWidth', 6);
+        plot(ax, x0, q(3), 'o', 'MarkerSize', 3.2, 'MarkerFaceColor', 'w', 'MarkerEdgeColor', 'w');
+        text(ax, x0, -54, sprintf('%.0f', q(4) - q(2)), 'HorizontalAlignment', 'center', ...
+            'VerticalAlignment', 'middle', 'FontName', C.font, 'FontSize', 6.5, 'Color', C.ink);
     end
 end
-% true value drawn last, in the reference colour, so it stays visible over the medians
-for k = 1:numel(tv)
-    ht = plot(ax, k + [-0.5 0.5], [tv(k) tv(k)], '--', 'Color', C.pink, 'LineWidth', 1.6);
-end
+text(ax, 0.28, -54, 'IQR', 'VerticalAlignment', 'middle', 'FontName', C.font, 'FontSize', 6.5, 'Color', C.axis);
 set(ax, 'XTick', 1:numel(tv), 'XTickLabel', arrayfun(@num2str, tv, 'UniformOutput', false));
-xlim(ax, [0.4 numel(tv) + 0.6]); ylim(ax, [0 30]);
-xlabel(ax, 'True PWV (m/s)', 'Color', C.ink); ylabel(ax, 'Estimated PWV (m/s)', 'Color', C.ink);
-legend(ax, [hb ht], {'Two planes', '20-plane regression', 'True PWV'}, 'Box', 'off', 'Color', 'none', 'FontSize', 7.5, 'Location', 'northwest');
+xlim(ax, [0.25 numel(tv) + 0.6]); ylim(ax, [-62 top]); set(ax, 'YTick', -50:50:100);
+xlabel(ax, 'True PWV (m/s)', 'Color', C.ink); ylabel(ax, 'Error in estimated PWV (%)', 'Color', C.ink);
+lg = legend(ax, hm, {'Two planes', '20-plane regression'}, 'Box', 'off', 'Color', 'none', 'FontSize', 7.5);
+set(lg, 'Position', [X(2) + 0.02, Y(2) + H - 0.07, 0.15, 0.06]);
 style_axes(ax);
 panel_label(ax, 'D', 'Pulse wave velocity', -0.22);
 
